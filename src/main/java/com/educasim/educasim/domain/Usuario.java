@@ -7,7 +7,7 @@ public class Usuario {
     private int id;
     private String tipo;
     private String contrasena;
-    private String pin;
+    private String pinSeguridad;
     private String nombre;
     private String apePat;
     private String apeMat;
@@ -18,10 +18,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id, String tipo, String contrasena, String nombre, String apePat, String apeMat, List<Contacto> contactos, FormaAprendizaje formaAprendizaje, List<Progreso> progresos) {
+    public Usuario(int id, String tipo, String contrasena, String pinSeguridad, String nombre, String apePat, String apeMat, List<Contacto> contactos, FormaAprendizaje formaAprendizaje, List<Progreso> progresos) {
         this.id = id;
         this.tipo = tipo;
         this.contrasena = contrasena;
+        this.pinSeguridad = pinSeguridad;
         this.nombre = nombre;
         this.apePat = apePat;
         this.apeMat = apeMat;
@@ -52,6 +53,14 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getPinSeguridad() {
+        return pinSeguridad;
+    }
+
+    public void setPinSeguridad(String pinSeguridad) {
+        this.pinSeguridad = pinSeguridad;
     }
 
     public String getNombre() {
