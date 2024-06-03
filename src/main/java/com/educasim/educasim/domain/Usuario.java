@@ -7,6 +7,7 @@ public class Usuario {
     private int id;
     private String tipo;
     private String contrasena;
+    private String pin;
     private String nombre;
     private String apePat;
     private String apeMat;
