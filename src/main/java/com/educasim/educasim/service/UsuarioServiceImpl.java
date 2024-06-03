@@ -59,12 +59,27 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public Usuario login(String correo, String pin) {
+        if(!correo.isEmpty() && !pin.isEmpty()){
+            if(correo.matches(String.valueOf(mailPattern)) /*REGEX DE PIN*/){
+                //@Query
+            }
+            else{
+                return null;
+            }
+        }else{
+            return null;
+        }
         return null;
     }
 
     @Override
     public int cambiarContrasena(String correo, String oldPass, String newPass) {
-        return 0;
+        if(!correo.isEmpty() && oldPass.isEmpty() && newPass.isEmpty()){
+            
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     @Override

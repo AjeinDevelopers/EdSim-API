@@ -4,7 +4,6 @@ package com.educasim.educasim.service;
 import com.educasim.educasim.domain.Usuario;
 import java.util.regex.Pattern;
 
-
 public interface UsuarioService {
 
     String regexPass = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$/";
