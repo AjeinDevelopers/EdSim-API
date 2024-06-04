@@ -164,12 +164,14 @@ create table relTemaMateria (
     foreign key(idMateria) references Materia(idMateria)
 );
 create table Clase (
-	idClase int(3) auto_increment primary key,
-    nombre varchar(100)
+	idClase varChar(6) primary key,
+    nombre varchar(100),
+    profesor int(3),
+    foreign key(profesor) references usuario(idUsuario)
 );
 create table relClaseMat(
 	idRelCM int(3) auto_increment primary key,
-    idClase int(3), idMateria int(3), foreign key(idClase) references Clase(idClase),
+    idClase varChar(6), idMateria int(3), foreign key(idClase) references Clase(idClase),
     foreign key(idMateria) references Materia(idMateria)
 );
 
@@ -179,7 +181,7 @@ create table Nivel(
 );
 create table relClaseNivel (
 	idRelCN int(3) auto_increment primary key,
-    idClase int(3),
+    idClase varChar(6),
     idNivel int(3), foreign key(idClase) references Clase(idClase),
     foreign key(idNivel) references Nivel(idNivel)
 );
@@ -200,7 +202,7 @@ create table relProgresoTema(
 
 create table relClaseUsuario(
 	idRelCP int(3),
-    idClase int(3),
+    idClase varChar(6),
     idUsuario int(3), 
     foreign key(idUsuario) references Usuario(idUsuario),
 	foreign key(idClase) references Clase(idClase)
