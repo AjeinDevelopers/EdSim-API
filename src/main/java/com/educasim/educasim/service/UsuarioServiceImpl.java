@@ -1,6 +1,5 @@
 package com.educasim.educasim.service;
 
-import com.educasim.educasim.domain.Contacto;
 import com.educasim.educasim.domain.Usuario;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,37 +14,34 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public int registro(Usuario usuario,  String codigoClase) {
-        if(usuario.getTipo().equals("alumno")){
+        if(usuario.getTipo().equals("a")){
             try{
-                if(usuario.getContactos() != null && !usuario.getNombre().isEmpty()
+                if(!usuario.getCorreo().isEmpty() && !usuario.getNombre().isEmpty()
                 && !usuario.getApeMat().isEmpty() && !usuario.getApePat().isEmpty()
                 && !usuario.getPinSeguridad().isEmpty() && !codigoClase.isEmpty()
                 && !usuario.getContrasena().isEmpty()){
 
-                    Contacto correo = new Contacto();
 
-                    for(Contacto x: usuario.getContactos()){
-                        if(x.getTipoContacto().equals("email")){
-                            correo = x;
-                        }
-                    }
-
-                    if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !correo.getContacto().matches(String.valueOf(mailPattern))){
+                    if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !usuario.getCorreo().matches(String.valueOf(mailPattern))){
                         return 0;
                     }
 
                     //Buscar codigo clase
 
                     Usuario registro = new Usuario();
+                    registro.setTipo(usuario.getTipo());
                     registro.setNombre(usuario.getNombre());
                     registro.setApeMat(usuario.getApeMat());
                     registro.setApePat(usuario.getApePat());
+                    registro.setCorreo(usuario.getCorreo());
+                    registro.setContrasena(usuario.getContrasena());
                     registro.setPinSeguridad(usuario.getPinSeguridad());
-                    registro.setContactos(usuario.getContactos());
 
-                    //@Query()
+                    int resultado = 0;
 
-                    return 1;
+
+
+                    return resultado;
 
                 }
             }catch(Exception e){

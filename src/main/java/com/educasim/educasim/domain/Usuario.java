@@ -11,14 +11,14 @@ public class Usuario {
     private String nombre;
     private String apePat;
     private String apeMat;
-    private List<Contacto> contactos;
+    private String correo;
     private FormaAprendizaje formaAprendizaje;
     private List<Progreso> progresos;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String tipo, String contrasena, String pinSeguridad, String nombre, String apePat, String apeMat, List<Contacto> contactos, FormaAprendizaje formaAprendizaje, List<Progreso> progresos) {
+    public Usuario(int id, String tipo, String contrasena, String pinSeguridad, String nombre, String apePat, String apeMat, String correo, FormaAprendizaje formaAprendizaje, List<Progreso> progresos) {
         this.id = id;
         this.tipo = tipo;
         this.contrasena = contrasena;
@@ -26,7 +26,7 @@ public class Usuario {
         this.nombre = nombre;
         this.apePat = apePat;
         this.apeMat = apeMat;
-        this.contactos = contactos;
+        this.correo = correo;
         this.formaAprendizaje = formaAprendizaje;
         this.progresos = progresos;
     }
@@ -87,12 +87,12 @@ public class Usuario {
         this.apeMat = apeMat;
     }
 
-    public List<Contacto> getContactos() {
-        return contactos;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setContactos(List<Contacto> contactos) {
-        this.contactos = contactos;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public FormaAprendizaje getFormaAprendizaje() {

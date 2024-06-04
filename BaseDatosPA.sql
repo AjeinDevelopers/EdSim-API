@@ -14,19 +14,9 @@ create table relUsuNom(
 create table Usuario(
 	idUsuario int(3) auto_increment primary key,
     tipoUsu varchar(2),
-    contraseña varchar(20)
-);
-
-create table TipoContacto(
-	idTipoContacto int(3) auto_increment primary key,
-    TipoContacto varchar(50)
-);
-
-create table relUsuCont (
-	idRelC int(3) auto_increment primary key,
-    idUsuario int(3), idTipoContacto int(3), contacto varchar(50), 
-    foreign key(idUsuario) references Usuario(idUsuario),
-    foreign key(idTipoContacto) references TipoContacto(idTipoContacto)
+    contraseña varchar(20),
+    pin varchar(20),
+    correo varchar(50)
 );
 
 create table relUsApr (

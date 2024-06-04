@@ -1,9 +1,7 @@
 package com.educasim.educasim.datos;
 
-import com.educasim.educasim.domain.Contacto;
 import com.educasim.educasim.domain.FormaAprendizaje;
 import com.educasim.educasim.domain.Usuario;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
