@@ -62,6 +62,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         if(!correo.isEmpty() && !pin.isEmpty()){
             if(correo.matches(String.valueOf(mailPattern)) /*REGEX DE PIN*/){
                 //@Query
+
             }
             else{
                 return null;
@@ -74,9 +75,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public int cambiarContrasena(String correo, String oldPass, String newPass) {
-        if(!correo.isEmpty() && oldPass.isEmpty() && newPass.isEmpty()){
-            
-            return 1;
+        if(!correo.isEmpty() && !oldPass.isEmpty() && !newPass.isEmpty()){
+            int resul = 0;
+            //resul = @Query()
+            return resul;
         }else{
             return 0;
         }
@@ -84,16 +86,34 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public int cambiarCorreo(String oldMail, String newMail, String contrasena) {
-        return 0;
+        if(!oldMail.isEmpty() && !newMail.isEmpty() && !contrasena.isEmpty()){
+            int resul = 0;
+            //resul = @Query()
+            return resul;
+        }else{
+            return 0;
+        }
     }
 
     @Override
     public int cambiarPin(String oldPin, String newPin, String correo, String contrasena) {
-        return 0;
+        if(!oldPin.isEmpty() && !newPin.isEmpty() && !correo.isEmpty() && !contrasena.isEmpty()){
+            int resul = 0;
+            //resul = @Query()
+            return resul;
+        }else{
+            return 0;
+        }
     }
 
     @Override
     public int eliminarCuenta(String correo, String contrasena) {
-        return 0;
+        if(!correo.isEmpty() && !contrasena.isEmpty()){
+            int resul = 0;
+            //resul = @Query()
+            return resul;
+        }else{
+            return 0;
+        }
     }
 }

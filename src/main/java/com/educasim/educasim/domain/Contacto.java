@@ -15,7 +15,7 @@ public class Contacto {
         this.contacto = contacto;
     }
 
-    public int getId() {
+    public int getId() {    
         return id;
     }
 
