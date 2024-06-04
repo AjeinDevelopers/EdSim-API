@@ -23,7 +23,7 @@ begin
 		insert into nombre(nombre, apePat, apeMat) values(nombreIn, apePatIn, apeMatIn);
         
         set idA  = (select id from usuario where correo = correoIn and contrasena = contrasenaIn and pin = pinIn);
-    end if;		
+    end if;			
     
 end;//
 
