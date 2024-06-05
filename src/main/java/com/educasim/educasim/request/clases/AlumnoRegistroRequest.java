@@ -3,12 +3,12 @@ package com.educasim.educasim.request.clases;
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
 
-public class RegistroRequest {
+public class AlumnoRegistroRequest {
 
     private Alumno alumno;
     private Clase clase;
 
-    public RegistroRequest(Alumno alumno, Clase clase) {
+    public AlumnoRegistroRequest(Alumno alumno, Clase clase) {
         this.alumno = alumno;
         this.clase = clase;
     }

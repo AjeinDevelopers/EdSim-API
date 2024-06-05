@@ -36,12 +36,9 @@ END;
 
 delimiter ;
 
-select count(*) from clase where idClase = "MnS3mJ";
 select * from alumno;
 select * from RelAlumClase;
-select idAlumno from Alumno where correoAlum = 'quesomanzana@gol.cmm' and passAlum = 'password123';
-insert into RelAlumClase(idClase, idAlumno) values('MnS3mj', 3);
-CALL sp_agregAlumn('MnS3mj', 'quesomanzana@gol.cmm', 'password123', 'pin223ms8', 'Juan', 'Perez', 'Gomez');
+
 
 #Procedimiento para consultar Alumno
 
@@ -67,28 +64,29 @@ END;
 
 delimiter ;
 
-CALL sp_consulAlum('correo@example.com');
+CALL sp_consulAlum('hola@gmail.com', "m3$n23InSa2");
 
 #Procedimiento para eliminar Alumno
 
 delimiter //
 
 CREATE PROCEDURE sp_elimAlum(
-    IN p_correoAlum VARCHAR(80)
+    IN p_correoAlum VARCHAR(80),
+    IN p_pinSeguridad VARCHAR(20)
 )
 BEGIN
     DECLARE existe INT;
-    DECLARE xMsj VARCHAR(50);
+    DECLARE idAlumnito INT;
+    
 
-    SET existe = (SELECT COUNT(*) FROM Alumno WHERE correoAlum = p_correoAlum);
+    SET existe = (SELECT COUNT(*) FROM Alumno WHERE correoAlum = p_correoAlum and pinSeguridad = p_pinSeguridad);
 
-    IF (existe > 0) THEN
-        DELETE FROM Alumno WHERE correoAlum = p_correoAlum;
-        SET xMsj = 'Alumno eliminado correctamente';
-        SELECT xMsj AS mensaje;
-    ELSE
-        SET xMsj = 'El correo no está registrado';
-        SELECT xMsj AS mensajeError;
+    IF (existe = 1) THEN
+		SET idAlumnito = (select idAlumno FROM Alumno WHERE correoAlum = p_correoAlum and pinSeguridad = p_pinSeguridad);
+        DELETE FROM relAlumClase where idAlumno = idAlumnito;
+        DELETE FROM relAlumExam where idAlumno = idAlumnito;
+        DELETE FROM relAlumEjer where idAlumno = idAlumnito;
+        DELETE FROM Alumno WHERE correoAlum = p_correoAlum and pinSeguridad = p_pinSeguridad;
     END IF;
 END;
 //

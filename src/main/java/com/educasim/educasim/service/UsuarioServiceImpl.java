@@ -2,7 +2,9 @@ package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
-import com.educasim.educasim.request.clases.RegistroRequest;
+import com.educasim.educasim.request.clases.AlumnoDeleteRequest;
+import com.educasim.educasim.request.clases.AlumnoLoginRequest;
+import com.educasim.educasim.request.clases.AlumnoRegistroRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @PostMapping("/registro/alumno")
     @Override
-    public int registro(@RequestBody RegistroRequest registroRequest) {
+    public int registro(@RequestBody AlumnoRegistroRequest registroRequest) {
 
         Alumno alumno = registroRequest.getUsuario();
         Clase clase = registroRequest.getClase();
@@ -45,15 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService{
                     return 0;
                 }
 
-                Alumno registro = new Alumno();
-                registro.setNombre(alumno.getNombre());
-                registro.setApeMat(alumno.getApeMat());
-                registro.setApePat(alumno.getApePat());
-                registro.setCorreo(alumno.getCorreo());
-                registro.setContrasena(alumno.getContrasena());
-                registro.setPinSeguridad(alumno.getPinSeguridad());
-
-                return userRepository.insertUsuario(registro, clase);
+                return userRepository.insertUsuario(alumno, clase);
 
             }
         } catch (Exception e) {
@@ -64,11 +58,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @GetMapping("consulta/alumno/")
     @Override
-    public Alumno login(String correo, String contrasena){
-        if(!correo.isEmpty() & !contrasena.isEmpty()){
-            Alumno alumno = new Alumno();
+    public Alumno login(@RequestBody AlumnoLoginRequest consulta){
+        if(!consulta.getCorreo().isEmpty() & !consulta.getContrasena().isEmpty()){
             try{
-                alumno = userRepository.obtenerALumno(correo, contrasena);
+                Alumno alumno  = new Alumno();
+                alumno = userRepository.obtenerALumno(consulta);
                 return alumno;
             }catch (Exception e){
                 return null;
@@ -110,12 +104,15 @@ public class UsuarioServiceImpl implements UsuarioService{
         }
     }
 
+    @PostMapping("/eliminar/alumno")
     @Override
-    public int eliminarCuenta(String correo, String contrasena) {
-        if(!correo.isEmpty() && !contrasena.isEmpty()){
-            int resul = 0;
-            //resul = @Query()
-            return resul;
+    public int eliminarCuenta(@RequestBody AlumnoDeleteRequest consulta) {
+        if(!consulta.getCorreo().isEmpty() && !consulta.getPinSeguridad().isEmpty()){
+            try{
+                return userRepository.eliminarAlumno(consulta);
+            }catch(Exception e){
+                return 0;
+            }
         }else{
             return 0;
         }
