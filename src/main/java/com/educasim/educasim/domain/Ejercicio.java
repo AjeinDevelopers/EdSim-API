@@ -5,19 +5,17 @@ import java.util.List;
 public class Ejercicio {
 
     private int id;
+    private String nombre;
     private int cantReactivos;
-    private List<Pregunta> preguntas;
-    private Tema tema;
     private String url;
 
     public Ejercicio() {
     }
 
-    public Ejercicio(int id, int cantReactivos, List<Pregunta> preguntas, Tema tema, String url) {
+    public Ejercicio(int id, String nombre, int cantReactivos, String url) {
         this.id = id;
+        this.nombre = nombre;
         this.cantReactivos = cantReactivos;
-        this.preguntas = preguntas;
-        this.tema = tema;
         this.url = url;
     }
 
@@ -29,28 +27,20 @@ public class Ejercicio {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public int getCantReactivos() {
         return cantReactivos;
     }
 
     public void setCantReactivos(int cantReactivos) {
         this.cantReactivos = cantReactivos;
-    }
-
-    public List<Pregunta> getPreguntas() {
-        return preguntas;
-    }
-
-    public void setPreguntas(List<Pregunta> preguntas) {
-        this.preguntas = preguntas;
-    }
-
-    public Tema getTema() {
-        return tema;
-    }
-
-    public void setTema(Tema tema) {
-        this.tema = tema;
     }
 
     public String getUrl() {

@@ -157,7 +157,7 @@ create table Clase (
 	idClase varChar(6) primary key,
     nombre varchar(100),
     profesor int(3),
-    foreign key(profesor) references usuario(idUsuario)
+    foreign key(profesor) references alumno(idUsuario)
 );
 create table relClaseMat(
 	idRelCM int(3) auto_increment primary key,

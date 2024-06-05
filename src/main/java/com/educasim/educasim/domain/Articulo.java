@@ -5,7 +5,6 @@ public class Articulo {
     private int id;
     private String titulo;
     private String resumen;
-    private Tema tema;
     private String url;
 
     public Articulo() {
@@ -33,14 +32,6 @@ public class Articulo {
 
     public void setResumen(String resumen) {
         this.resumen = resumen;
-    }
-
-    public Tema getTema() {
-        return tema;
-    }
-
-    public void setTema(Tema tema) {
-        this.tema = tema;
     }
 
     public String getUrl() {

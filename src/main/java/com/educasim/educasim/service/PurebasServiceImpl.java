@@ -1,8 +1,8 @@
 package com.educasim.educasim.service;
 
+import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Ejercicio;
 import com.educasim.educasim.domain.Examen;
-import com.educasim.educasim.domain.Usuario;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -36,8 +36,8 @@ public class PurebasServiceImpl implements PruebasService{
     }
 
     @Override
-    public int registrarExamen(Usuario usuario, Examen examen, int aciertos, int intentos) {
-        if(usuario != null && examen != null && aciertos >= 0 && intentos > 0){
+    public int registrarExamen(Alumno alumno, Examen examen, int aciertos, int intentos) {
+        if(alumno != null && examen != null && aciertos >= 0 && intentos > 0){
             int resultado = 0;
             //Query
             return resultado;
@@ -47,7 +47,7 @@ public class PurebasServiceImpl implements PruebasService{
     }
 
     @Override
-    public int registrarEjercico(Usuario usuario, Ejercicio ejercicio, int aciertos) {
+    public int registrarEjercico(Alumno alumno, Ejercicio ejercicio, int aciertos) {
         return 0;
     }
 }
