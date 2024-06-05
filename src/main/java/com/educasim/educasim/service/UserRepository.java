@@ -16,4 +16,8 @@ public class UserRepository {
         String sql = "CALL sp_registrarUsuario(?,?,?,?,?,?,?,?)";
         return jdbcTemplate.update(sql, usuario.getNombre(), usuario.getTipo(), usuario.getApePat(), usuario.getApeMat(), usuario.getCorreo(), usuario.getPinSeguridad(), usuario.getContrasena(), clase.getId());
     }
+
+    public JdbcTemplate getJdbcTemplate() {
+        return jdbcTemplate;
+    }
 }

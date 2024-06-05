@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.regex.Pattern;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 @RestController
 @RequestMapping("/usuario")
@@ -54,11 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService{
                     registro.setContrasena(usuario.getContrasena());
                     registro.setPinSeguridad(usuario.getPinSeguridad());
 
-                    int resultado = 0;
-
-                    resultado =  userRepository.insertUsuario(registro, clase);
-
-                    return resultado;
+                    return userRepository.insertUsuario(registro, clase);
 
                 }
             }catch(Exception e){
@@ -84,11 +81,7 @@ public class UsuarioServiceImpl implements UsuarioService{
                     registro.setContrasena(usuario.getContrasena());
                     registro.setPinSeguridad(usuario.getPinSeguridad());
 
-                    int resultado = 0;
-
-                    resultado =  userRepository.insertUsuario(registro, clase);
-
-                    return resultado;
+                    return userRepository.insertUsuario(registro, clase);
 
                 }
             }catch(Exception e){
@@ -103,15 +96,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public Usuario login(String correo, String pin) {
         if(!correo.isEmpty() && !pin.isEmpty()){
-            if(correo.matches(String.valueOf(mailPattern)) /*REGEX DE PIN*/){
+            if(correo.matches(String.valueOf(mailPattern)) && pin.matches(String.valueOf(passPatern))){
                 //@Query
-
+                String sql = "SELECT * FROM Alumno WHERE correoAlum = ? AND passAlum = ?";
+                Usuario usuario = null;
+                usuario = userRepository.getJdbcTemplate().queryForObject(sql, new Object[]{correo, pin}, new BeanPropertyRowMapper<>(Usuario.class));
+                return usuario;
             }
-            else{
-                return null;
-            }
-        }else{
-            return null;
         }
         return null;
     }
