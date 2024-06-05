@@ -1,4 +1,4 @@
-#drop database EducaSim;
+drop database if exists EducaSim;
 create database EducaSim;
 use EducaSim;
 
@@ -14,7 +14,7 @@ create table relUsuNom(
 create table Usuario(
 	idUsuario int(3) auto_increment primary key,
     tipoUsu varchar(2),
-    contraseña varchar(20),
+    contrasena varchar(20),
     pin varchar(20),
     correo varchar(50)
 );

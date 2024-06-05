@@ -11,7 +11,7 @@ public class Clase {
     public Clase() {
     }
 
-    public Clase(int id, String nombre, Nivel nivel, Usuario profesor, Materia materia) {
+    public Clase(String id, String nombre, Nivel nivel, Usuario profesor, Materia materia) {
         this.id = id;
         this.nombre = nombre;
         this.nivel = nivel;
@@ -19,11 +19,11 @@ public class Clase {
         this.materia = materia;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

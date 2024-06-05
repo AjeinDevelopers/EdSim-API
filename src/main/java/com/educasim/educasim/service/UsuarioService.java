@@ -1,6 +1,7 @@
 package com.educasim.educasim.service;
 
 
+import com.educasim.educasim.request.clases.RegistroRequest;
 import com.educasim.educasim.domain.Usuario;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,7 @@ public interface UsuarioService {
     String regexmail = "/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/";
     Pattern mailPattern = Pattern.compile(regexmail);
 
-    public int registro(Usuario usuario, String codigoClase);
+    public int registro(RegistroRequest registroRequest);
 
     public Usuario login(String correo, String contrasena);
 

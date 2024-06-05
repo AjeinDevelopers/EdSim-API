@@ -1,32 +1,49 @@
 package com.educasim.educasim.service;
 
+import com.educasim.educasim.domain.Clase;
+import com.educasim.educasim.request.clases.RegistroRequest;
 import com.educasim.educasim.domain.Usuario;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.regex.Pattern;
 
+@RestController
+@RequestMapping("/usuario")
+@CrossOrigin
 public class UsuarioServiceImpl implements UsuarioService{
 
-    private final String regexPass = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$/";
+    @Autowired
+    private UserRepository userRepository;
+
+
+    private final String regexPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$";
     private final Pattern passPatern = Pattern.compile(regexPass);
-    private final String regexmail = "/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/";
+    private final String regexmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     private final Pattern mailPattern = Pattern.compile(regexmail);
 
+    public UsuarioServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @PostMapping("/registro")
     @Override
-    public int registro(Usuario usuario,  String codigoClase) {
+    public int registro(@RequestBody RegistroRequest registroRequest) {
+
+        Usuario usuario = registroRequest.getUsuario();
+        Clase clase = registroRequest.getClase();
+
         if(usuario.getTipo().equals("a")){
             try{
                 if(!usuario.getCorreo().isEmpty() && !usuario.getNombre().isEmpty()
                 && !usuario.getApeMat().isEmpty() && !usuario.getApePat().isEmpty()
-                && !usuario.getPinSeguridad().isEmpty() && !codigoClase.isEmpty()
+                && !usuario.getPinSeguridad().isEmpty() && !clase.getId().isEmpty()
                 && !usuario.getContrasena().isEmpty()){
 
 
                     if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !usuario.getCorreo().matches(String.valueOf(mailPattern))){
                         return 0;
                     }
-
-                    //Buscar codigo clase
 
                     Usuario registro = new Usuario();
                     registro.setTipo(usuario.getTipo());
@@ -39,7 +56,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
                     int resultado = 0;
 
-
+                    resultado =  userRepository.insertUsuario(registro, clase);
 
                     return resultado;
 
@@ -47,7 +64,37 @@ public class UsuarioServiceImpl implements UsuarioService{
             }catch(Exception e){
                 return 0;
             }
-        }else{
+        }else if(usuario.getTipo().equals("p")){
+            try{
+                if(!usuario.getCorreo().isEmpty() && !usuario.getNombre().isEmpty()
+                        && !usuario.getApeMat().isEmpty() && !usuario.getApePat().isEmpty()
+                        && !usuario.getContrasena().isEmpty()){
+
+
+                    if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !usuario.getCorreo().matches(String.valueOf(mailPattern))){
+                        return 0;
+                    }
+
+                    Usuario registro = new Usuario();
+                    registro.setTipo(usuario.getTipo());
+                    registro.setNombre(usuario.getNombre());
+                    registro.setApeMat(usuario.getApeMat());
+                    registro.setApePat(usuario.getApePat());
+                    registro.setCorreo(usuario.getCorreo());
+                    registro.setContrasena(usuario.getContrasena());
+                    registro.setPinSeguridad(usuario.getPinSeguridad());
+
+                    int resultado = 0;
+
+                    resultado =  userRepository.insertUsuario(registro, clase);
+
+                    return resultado;
+
+                }
+            }catch(Exception e){
+                return 0;
+            }
+        }else {
             return 0;
         }
         return 0;
