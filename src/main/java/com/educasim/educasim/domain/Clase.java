@@ -4,19 +4,17 @@ public class Clase {
 
     private String id;
     private String nombre;
-    private Nivel nivel;
-    private Usuario profesor;
     private Materia materia;
+    private Alumno profesor;
 
-    public Clase() {
-    }
-
-    public Clase(String id, String nombre, Nivel nivel, Usuario profesor, Materia materia) {
+    public Clase(String id, String nombre, Materia materia, Alumno profesor) {
         this.id = id;
         this.nombre = nombre;
-        this.nivel = nivel;
-        this.profesor = profesor;
         this.materia = materia;
+        this.profesor = profesor;
+    }
+
+    public Clase() {
     }
 
     public String getId() {
@@ -35,27 +33,19 @@ public class Clase {
         this.nombre = nombre;
     }
 
-    public Nivel getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
-    }
-
-    public Usuario getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Usuario profesor) {
-        this.profesor = profesor;
-    }
-
     public Materia getMateria() {
         return materia;
     }
 
     public void setMateria(Materia materia) {
         this.materia = materia;
+    }
+
+    public Alumno getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Alumno profesor) {
+        this.profesor = profesor;
     }
 }

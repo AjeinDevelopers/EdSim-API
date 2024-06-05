@@ -1,24 +1,24 @@
 package com.educasim.educasim.request.clases;
 
+import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
-import com.educasim.educasim.domain.Usuario;
 
 public class RegistroRequest {
 
-    private Usuario usuario;
+    private Alumno alumno;
     private Clase clase;
 
-    public RegistroRequest(Usuario usuario, Clase clase) {
-        this.usuario = usuario;
+    public RegistroRequest(Alumno alumno, Clase clase) {
+        this.alumno = alumno;
         this.clase = clase;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Alumno getUsuario() {
+        return alumno;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public Clase getClase() {

@@ -1,4 +1,4 @@
-drop database if exists EducaSim;
+drop database if exists educasim;
 create database EducaSim;
 use EducaSim;
 
@@ -30,6 +30,7 @@ create table Clase(
     nombre varchar(50),
     idMateria int(3),
     idProfesor int(3),
+    foreign key(idProfesor) references Profesor(idProfesor),
     foreign key(idMateria) references Materia(idMateria)
 );
 
@@ -56,13 +57,17 @@ create table Ejercicio(
 create table PreguntasExam(
 	idPregunta int(3) auto_increment not null primary key,
     enunciado varchar(9000),
-    respCorrecta varchar(500)
+    respCorrecta varchar(500),
+    idExamen int(3),
+    foreign key (idExamen) references Examen(idExamen)
 );
 
 create table PreguntasEjer(
 	idPregunta int(3) auto_increment not null primary key,
     enunciado varchar(9000),
-    respCorrecta varchar(500)
+    respCorrecta varchar(500),
+    idEjercicio int(3),
+    foreign key (idEjercicio) references Ejercicio(idEjercicio)
 );
 
 create table RespuestasOpc(

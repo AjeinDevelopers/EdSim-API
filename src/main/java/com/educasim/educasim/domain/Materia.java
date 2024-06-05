@@ -6,7 +6,5 @@ public class Materia {
 
     private int id;
     private String nombre;
-    private List<Tema> temas;
-
 
 }

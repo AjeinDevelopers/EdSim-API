@@ -1,10 +1,5 @@
 package com.educasim.educasim.datos;
 
-import com.educasim.educasim.domain.FormaAprendizaje;
-import com.educasim.educasim.domain.Usuario;
-
-import java.util.List;
-
 public class DatosUsuarioImpl  implements  DatosUsuario{
 
     /*

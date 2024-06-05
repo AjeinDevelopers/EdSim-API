@@ -1,18 +1,18 @@
 package com.educasim.educasim.domain;
 
-public class Pregunta {
+public class PreguntaEjercicio {
 
     private int idPregunta;
     private String enunciado;
-    private Respuesta respuesta;
+    private String respCorrecta;
 
-    public Pregunta() {
-    }
-
-    public Pregunta(int idPregunta, String enunciado, Respuesta respuesta) {
+    public PreguntaEjercicio(int idPregunta, String enunciado, String respCorrecta) {
         this.idPregunta = idPregunta;
         this.enunciado = enunciado;
-        this.respuesta = respuesta;
+        this.respCorrecta = respCorrecta;
+    }
+
+    public PreguntaEjercicio() {
     }
 
     public int getIdPregunta() {
@@ -31,11 +31,11 @@ public class Pregunta {
         this.enunciado = enunciado;
     }
 
-    public Respuesta getRespuesta() {
-        return respuesta;
+    public String getRespCorrecta() {
+        return respCorrecta;
     }
 
-    public void setRespuesta(Respuesta respuesta) {
-        this.respuesta = respuesta;
+    public void setRespCorrecta(String respCorrecta) {
+        this.respCorrecta = respCorrecta;
     }
 }

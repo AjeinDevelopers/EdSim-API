@@ -6,21 +6,17 @@ import java.util.Timer;
 public class Examen {
 
     private int id;
+    private String nombre;
     private int cantReactivos;
-    private Timer duracion;
-    private List<Pregunta> preguntas;
-    private Tema tema;
     private String url;
 
     public Examen() {
     }
 
-    public Examen(int id, int cantReactivos, Timer duracion, List<Pregunta> preguntas, Tema tema, String url) {
+    public Examen(int id, String nombre, int cantReactivos, String url) {
         this.id = id;
+        this.nombre = nombre;
         this.cantReactivos = cantReactivos;
-        this.duracion = duracion;
-        this.preguntas = preguntas;
-        this.tema = tema;
         this.url = url;
     }
 
@@ -32,36 +28,20 @@ public class Examen {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public int getCantReactivos() {
         return cantReactivos;
     }
 
     public void setCantReactivos(int cantReactivos) {
         this.cantReactivos = cantReactivos;
-    }
-
-    public Timer getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(Timer duracion) {
-        this.duracion = duracion;
-    }
-
-    public List<Pregunta> getPreguntas() {
-        return preguntas;
-    }
-
-    public void setPreguntas(List<Pregunta> preguntas) {
-        this.preguntas = preguntas;
-    }
-
-    public Tema getTema() {
-        return tema;
-    }
-
-    public void setTema(Tema tema) {
-        this.tema = tema;
     }
 
     public String getUrl() {

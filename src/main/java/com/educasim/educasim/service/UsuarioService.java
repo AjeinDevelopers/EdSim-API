@@ -1,8 +1,9 @@
 package com.educasim.educasim.service;
 
 
+import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.request.clases.RegistroRequest;
-import com.educasim.educasim.domain.Usuario;
+
 import java.util.regex.Pattern;
 
 public interface UsuarioService {
@@ -14,7 +15,7 @@ public interface UsuarioService {
 
     public int registro(RegistroRequest registroRequest);
 
-    public Usuario login(String correo, String contrasena);
+    public Alumno login(String correo, String contrasena);
 
     public int cambiarContrasena(String correo, String oldPass, String newPass);
 

@@ -1,8 +1,8 @@
 package com.educasim.educasim.service;
 
+import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
 import com.educasim.educasim.request.clases.RegistroRequest;
-import com.educasim.educasim.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,29 +31,29 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public int registro(@RequestBody RegistroRequest registroRequest) {
 
-        Usuario usuario = registroRequest.getUsuario();
+        Alumno alumno = registroRequest.getUsuario();
         Clase clase = registroRequest.getClase();
 
-        if(usuario.getTipo().equals("a")){
+        if(alumno.getTipo().equals("a")){
             try{
-                if(!usuario.getCorreo().isEmpty() && !usuario.getNombre().isEmpty()
-                && !usuario.getApeMat().isEmpty() && !usuario.getApePat().isEmpty()
-                && !usuario.getPinSeguridad().isEmpty() && !clase.getId().isEmpty()
-                && !usuario.getContrasena().isEmpty()){
+                if(!alumno.getCorreo().isEmpty() && !alumno.getNombre().isEmpty()
+                && !alumno.getApeMat().isEmpty() && !alumno.getApePat().isEmpty()
+                && !alumno.getPinSeguridad().isEmpty() && !clase.getId().isEmpty()
+                && !alumno.getContrasena().isEmpty()){
 
 
-                    if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !usuario.getCorreo().matches(String.valueOf(mailPattern))){
+                    if(!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))){
                         return 0;
                     }
 
-                    Usuario registro = new Usuario();
-                    registro.setTipo(usuario.getTipo());
-                    registro.setNombre(usuario.getNombre());
-                    registro.setApeMat(usuario.getApeMat());
-                    registro.setApePat(usuario.getApePat());
-                    registro.setCorreo(usuario.getCorreo());
-                    registro.setContrasena(usuario.getContrasena());
-                    registro.setPinSeguridad(usuario.getPinSeguridad());
+                    Alumno registro = new Alumno();
+                    registro.setTipo(alumno.getTipo());
+                    registro.setNombre(alumno.getNombre());
+                    registro.setApeMat(alumno.getApeMat());
+                    registro.setApePat(alumno.getApePat());
+                    registro.setCorreo(alumno.getCorreo());
+                    registro.setContrasena(alumno.getContrasena());
+                    registro.setPinSeguridad(alumno.getPinSeguridad());
 
                     return userRepository.insertUsuario(registro, clase);
 
@@ -61,25 +61,25 @@ public class UsuarioServiceImpl implements UsuarioService{
             }catch(Exception e){
                 return 0;
             }
-        }else if(usuario.getTipo().equals("p")){
+        }else if(alumno.getTipo().equals("p")){
             try{
-                if(!usuario.getCorreo().isEmpty() && !usuario.getNombre().isEmpty()
-                        && !usuario.getApeMat().isEmpty() && !usuario.getApePat().isEmpty()
-                        && !usuario.getContrasena().isEmpty()){
+                if(!alumno.getCorreo().isEmpty() && !alumno.getNombre().isEmpty()
+                        && !alumno.getApeMat().isEmpty() && !alumno.getApePat().isEmpty()
+                        && !alumno.getContrasena().isEmpty()){
 
 
-                    if(!usuario.getContrasena().matches(String.valueOf(passPatern)) || !usuario.getCorreo().matches(String.valueOf(mailPattern))){
+                    if(!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))){
                         return 0;
                     }
 
-                    Usuario registro = new Usuario();
-                    registro.setTipo(usuario.getTipo());
-                    registro.setNombre(usuario.getNombre());
-                    registro.setApeMat(usuario.getApeMat());
-                    registro.setApePat(usuario.getApePat());
-                    registro.setCorreo(usuario.getCorreo());
-                    registro.setContrasena(usuario.getContrasena());
-                    registro.setPinSeguridad(usuario.getPinSeguridad());
+                    Alumno registro = new Alumno();
+                    registro.setTipo(alumno.getTipo());
+                    registro.setNombre(alumno.getNombre());
+                    registro.setApeMat(alumno.getApeMat());
+                    registro.setApePat(alumno.getApePat());
+                    registro.setCorreo(alumno.getCorreo());
+                    registro.setContrasena(alumno.getContrasena());
+                    registro.setPinSeguridad(alumno.getPinSeguridad());
 
                     return userRepository.insertUsuario(registro, clase);
 
@@ -94,7 +94,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public Usuario login(String correo, String pin) {
+    public Alumno login(String correo, String pin) {
         if(!correo.isEmpty() && !pin.isEmpty()){
             if(correo.matches(String.valueOf(mailPattern)) && pin.matches(String.valueOf(passPatern))){
                 //@Query

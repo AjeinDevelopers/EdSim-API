@@ -23,13 +23,13 @@ begin
     declare idNom int;
     declare existeClase int;
     
-	set existe = (select count(*) from usuario where correo = correoIn and contrasena = contrasenaIn and pin = pinIn);
+	set existe = (select count(*) from alumno where correo = correoIn and contrasena = contrasenaIn and pin = pinIn);
     set existeClase = (select count(*) from clase where idClase = clase);
     
 	if(existe = 0 and existeClase = 1) then			
-		insert into usuario(tipoUsu, contrasena, pin, correo) values(tipoUsuario, contrasenaIn, pinIn, correoIn);
+		insert into alumno(tipoUsu, contrasena, pin, correo) values(tipoUsuario, contrasenaIn, pinIn, correoIn);
 		insert into nombre(nombre, apePat, apeMat) values(nombreIn, apePatIn, apeMatIn);
-        set idUs = (select idUsuario from usuario where correo = correoIn and contrasena = contrasenaIn and pin = pinIn);
+        set idUs = (select idUsuario from alumno where correo = correoIn and contrasena = contrasenaIn and pin = pinIn);
         set idNom = (select idNombre from nombre where nombre = nombreIn and apePat = apePatIn and apeMat = apeMatIn);
         insert into relUsuNom(idUsuario, idNombre) values(idUs, idNom);
     end if;			

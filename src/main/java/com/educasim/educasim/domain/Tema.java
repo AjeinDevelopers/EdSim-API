@@ -4,17 +4,15 @@ public class Tema {
 
     private int id;
     private String nombre;
-    private Materia materia;
-    private Nivel nivel;
+    private Temario temario;
 
     public Tema() {
     }
 
-    public Tema(int id, String nombre, Materia materia, Nivel nivel) {
+    public Tema(int id, String nombre, Temario temario) {
         this.id = id;
         this.nombre = nombre;
-        this.materia = materia;
-        this.nivel = nivel;
+        this.temario = temario;
     }
 
     public int getId() {
@@ -33,19 +31,11 @@ public class Tema {
         this.nombre = nombre;
     }
 
-    public Materia getMateria() {
-        return materia;
+    public Temario getTemario() {
+        return temario;
     }
 
-    public void setMateria(Materia materia) {
-        this.materia = materia;
-    }
-
-    public Nivel getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
+    public void setTemario(Temario temario) {
+        this.temario = temario;
     }
 }

@@ -4,15 +4,13 @@ public class Respuesta {
 
     private int id;
     private String respuesta;
-    private Pregunta pregunta;
 
     public Respuesta() {
     }
 
-    public Respuesta(int id, String respuesta, Pregunta pregunta) {
+    public Respuesta(int id, String respuesta) {
         this.id = id;
         this.respuesta = respuesta;
-        this.pregunta = pregunta;
     }
 
     public int getId() {
@@ -29,13 +27,5 @@ public class Respuesta {
 
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
-    }
-
-    public Pregunta getPregunta() {
-        return pregunta;
-    }
-
-    public void setPregunta(Pregunta pregunta) {
-        this.pregunta = pregunta;
     }
 }
