@@ -3,6 +3,8 @@ use EducaSim;
 #Procedimientos para Profesor
 #Procedimiento para agregar Profesor
 
+#drop procedure sp_agregProf;
+
 delimiter //
 
 CREATE PROCEDURE sp_agregProf(
@@ -14,24 +16,19 @@ CREATE PROCEDURE sp_agregProf(
 )
 BEGIN
     DECLARE existe INT;
-    DECLARE xMsj VARCHAR(50);
 
     SET existe = (SELECT COUNT(idProfesor) FROM Profesor WHERE correoProf = p_correoProf);
 
     IF (existe = 0) THEN
         INSERT INTO Profesor(correoProf, passProf, nombreProf, apePatProf, apeMatProf)
         VALUES (p_correoProf, p_passProf, p_nombreProf, p_apePatProf, p_apeMatProf);
-        SELECT * FROM Profesor;
-    ELSE
-        SET xMsj = 'El correo ya está registrado';
-        SELECT xMsj AS mensajeError;
     END IF;
 END;
 //
 
 delimiter ;
 
-CALL sp_agregProf("pablo@gmail.com", "p4bl0", "Pablo", "Roca", "Filete");
+select * from profesor;
 
 #Procedimiento para consultar Profesor
 

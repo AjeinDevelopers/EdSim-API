@@ -18,13 +18,7 @@ public interface UsuarioService {
     public int registro(AlumnoRegistroRequest registroRequest);
 
     public Alumno login(AlumnoLoginRequest consulta);
-
-    public int cambiarContrasena(String correo, String oldPass, String newPass);
-
-    public int cambiarCorreo(String oldMail, String newMail, String contrasena);
-
-    public int cambiarPin(String oldPin, String newPin, String correo, String contrasena);
-
+    
     public int eliminarCuenta(AlumnoDeleteRequest consulta);
 
 }

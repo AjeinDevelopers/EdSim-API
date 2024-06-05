@@ -71,39 +71,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         return null;
     }
 
-    @Override
-    public int cambiarContrasena(String correo, String oldPass, String newPass) {
-        if(!correo.isEmpty() && !oldPass.isEmpty() && !newPass.isEmpty()){
-            int resul = 0;
-            //resul = @Query()
-            return resul;
-        }else{
-            return 0;
-        }
-    }
-
-    @Override
-    public int cambiarCorreo(String oldMail, String newMail, String contrasena) {
-        if(!oldMail.isEmpty() && !newMail.isEmpty() && !contrasena.isEmpty()){
-            int resul = 0;
-            //resul = @Query()
-            return resul;
-        }else{
-            return 0;
-        }
-    }
-
-    @Override
-    public int cambiarPin(String oldPin, String newPin, String correo, String contrasena) {
-        if(!oldPin.isEmpty() && !newPin.isEmpty() && !correo.isEmpty() && !contrasena.isEmpty()){
-            int resul = 0;
-            //resul = @Query()
-            return resul;
-        }else{
-            return 0;
-        }
-    }
-
     @PostMapping("/eliminar/alumno")
     @Override
     public int eliminarCuenta(@RequestBody AlumnoDeleteRequest consulta) {
