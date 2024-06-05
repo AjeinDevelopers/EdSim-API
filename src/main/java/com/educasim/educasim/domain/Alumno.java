@@ -16,6 +16,24 @@ public class Alumno {
     public Alumno() {
     }
 
+    public Alumno(int id, String correo, String contrasena, String pinSeguridad, String nombre, String apePat, String apeMat, String formaAprendizaje) {
+        this.id = id;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.pinSeguridad = pinSeguridad;
+        this.nombre = nombre;
+        this.apePat = apePat;
+        this.apeMat = apeMat;
+        this.formaAprendizaje = formaAprendizaje;
+    }
+    public Alumno(int id, String correo, String nombre, String apePat, String apeMat) {
+        this.id = id;
+        this.correo = correo;
+        this.nombre = nombre;
+        this.apePat = apePat;
+        this.apeMat = apeMat;
+    }
+
     public int getId() {
         return id;
     }

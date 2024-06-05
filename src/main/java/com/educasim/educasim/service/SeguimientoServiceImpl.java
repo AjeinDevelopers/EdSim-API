@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SeguimientoServiceImpl implements SeguimientoService{
 
-    @Override
+    /*@Override
     public Map<String, Progreso> obtenerProgreso(Alumno alumno) {
         if(alumno != null){
             Map<String, Progreso> resul = new HashMap<>();
@@ -16,6 +16,6 @@ public class SeguimientoServiceImpl implements SeguimientoService{
         }else{
             return null;
         }
-    }
+    }*/
 
 }

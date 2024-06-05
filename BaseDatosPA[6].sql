@@ -28,19 +28,12 @@ create table Materia(
 );
 
 create table Clase(
-	idClase int(3) auto_increment not null primary key,
+	idClase varchar(6) not null primary key,
     nombre varchar(50),
     idMateria int(3),
     idProfesor int(3),
     foreign key(idMateria) references Materia(idMateria),
     foreign key(idProfesor) references Profesor(idProfesor)
-);
-
-create table Tema(
-	idTema int(3) auto_increment not null primary key,
-    nombre varchar(40),
-    idTemario int(3),
-    foreign key(idTemario) references Temario(idTemario)
 );
 
 create table Articulo(
@@ -83,7 +76,7 @@ create table RespuestasOpc(
 
 create table RelAlumClase(
 	idRelAlumClase int(3) auto_increment not null primary key,
-    idClase int(3),
+    idClase varChar(6),
     idAlumno int(3),
     progreso int(3),
     foreign key(idClase) references Clase(idClase),
@@ -94,6 +87,13 @@ create table Temario(
 	idTemario int(3) auto_increment not null primary key,
     idMateria int(3),
     foreign key(idMateria) references Materia(idMateria)
+);
+
+create table Tema(
+	idTema int(3) auto_increment not null primary key,
+    nombre varchar(40),
+    idTemario int(3),
+    foreign key(idTemario) references Temario(idTemario)
 );
 
 create table Material(
@@ -170,8 +170,8 @@ INSERT INTO Materia (nombre) VALUES ("calculo diferencial");
 INSERT INTO Materia (nombre) VALUES ("calculo integral");
 INSERT INTO Materia (nombre) VALUES ("probabilidad");
 
-INSERT INTO Clase (nombre, idMateria, idProfesor) VALUES ("6IM8", 1, 1);
-INSERT INTO Clase (nombre, idMateria, idProfesor) VALUES ("6IM6", 2, 2);
+INSERT INTO Clase (nombre, idMateria, idProfesor, idClase) VALUES ("6IM8", 1, 1, "MnS3mj");
+#INSERT INTO Clase (nombre, idMateria, idProfesor) VALUES ("6IM6", 2, 2);
 
 INSERT INTO Tema (nombre) VALUES ("limites");
 INSERT INTO Tema (nombre) VALUES ("derivacion");

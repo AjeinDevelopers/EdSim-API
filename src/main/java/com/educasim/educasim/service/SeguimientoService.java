@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface SeguimientoService {
 
-    Map<String, Progreso> obtenerProgreso(Alumno alumno);
+    //Map<String, Progreso> obtenerProgreso(Alumno alumno);
 
 }

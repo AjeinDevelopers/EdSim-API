@@ -27,81 +27,51 @@ public class UsuarioServiceImpl implements UsuarioService{
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registro/alumno")
     @Override
     public int registro(@RequestBody RegistroRequest registroRequest) {
 
         Alumno alumno = registroRequest.getUsuario();
         Clase clase = registroRequest.getClase();
 
-        if(alumno.getTipo().equals("a")){
-            try{
-                if(!alumno.getCorreo().isEmpty() && !alumno.getNombre().isEmpty()
-                && !alumno.getApeMat().isEmpty() && !alumno.getApePat().isEmpty()
-                && !alumno.getPinSeguridad().isEmpty() && !clase.getId().isEmpty()
-                && !alumno.getContrasena().isEmpty()){
+        try {
+            if (!alumno.getCorreo().isEmpty() && !alumno.getNombre().isEmpty()
+                    && !alumno.getApeMat().isEmpty() && !alumno.getApePat().isEmpty()
+                    && !alumno.getPinSeguridad().isEmpty() && !clase.getId().isEmpty()
+                    && !alumno.getContrasena().isEmpty()) {
 
 
-                    if(!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))){
-                        return 0;
-                    }
-
-                    Alumno registro = new Alumno();
-                    registro.setTipo(alumno.getTipo());
-                    registro.setNombre(alumno.getNombre());
-                    registro.setApeMat(alumno.getApeMat());
-                    registro.setApePat(alumno.getApePat());
-                    registro.setCorreo(alumno.getCorreo());
-                    registro.setContrasena(alumno.getContrasena());
-                    registro.setPinSeguridad(alumno.getPinSeguridad());
-
-                    return userRepository.insertUsuario(registro, clase);
-
+                if (!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))) {
+                    return 0;
                 }
-            }catch(Exception e){
-                return 0;
+
+                Alumno registro = new Alumno();
+                registro.setNombre(alumno.getNombre());
+                registro.setApeMat(alumno.getApeMat());
+                registro.setApePat(alumno.getApePat());
+                registro.setCorreo(alumno.getCorreo());
+                registro.setContrasena(alumno.getContrasena());
+                registro.setPinSeguridad(alumno.getPinSeguridad());
+
+                return userRepository.insertUsuario(registro, clase);
+
             }
-        }else if(alumno.getTipo().equals("p")){
-            try{
-                if(!alumno.getCorreo().isEmpty() && !alumno.getNombre().isEmpty()
-                        && !alumno.getApeMat().isEmpty() && !alumno.getApePat().isEmpty()
-                        && !alumno.getContrasena().isEmpty()){
-
-
-                    if(!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))){
-                        return 0;
-                    }
-
-                    Alumno registro = new Alumno();
-                    registro.setTipo(alumno.getTipo());
-                    registro.setNombre(alumno.getNombre());
-                    registro.setApeMat(alumno.getApeMat());
-                    registro.setApePat(alumno.getApePat());
-                    registro.setCorreo(alumno.getCorreo());
-                    registro.setContrasena(alumno.getContrasena());
-                    registro.setPinSeguridad(alumno.getPinSeguridad());
-
-                    return userRepository.insertUsuario(registro, clase);
-
-                }
-            }catch(Exception e){
-                return 0;
-            }
-        }else {
+        } catch (Exception e) {
             return 0;
         }
         return 0;
     }
 
+    @GetMapping("consulta/alumno/")
     @Override
-    public Alumno login(String correo, String pin) {
-        if(!correo.isEmpty() && !pin.isEmpty()){
-            if(correo.matches(String.valueOf(mailPattern)) && pin.matches(String.valueOf(passPatern))){
-                //@Query
-                String sql = "SELECT * FROM Alumno WHERE correoAlum = ? AND passAlum = ?";
-                Usuario usuario = null;
-                usuario = userRepository.getJdbcTemplate().queryForObject(sql, new Object[]{correo, pin}, new BeanPropertyRowMapper<>(Usuario.class));
-                return usuario;
+    public Alumno login(String correo, String contrasena){
+        if(!correo.isEmpty() & !contrasena.isEmpty()){
+            Alumno alumno = new Alumno();
+            try{
+                alumno = userRepository.obtenerALumno(correo, contrasena);
+                return alumno;
+            }catch (Exception e){
+                return null;
             }
         }
         return null;
