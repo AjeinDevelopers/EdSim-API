@@ -14,10 +14,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin
-public class UsuarioServiceImpl implements UsuarioService{
+public class AlumnoServiceImpl implements AlumnoService{
 
     @Autowired
-    private UserRepository userRepository;
+    private AlumnoRepository userRepository;
 
 
     private final String regexPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$";
@@ -25,7 +25,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     private final String regexmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     private final Pattern mailPattern = Pattern.compile(regexmail);
 
-    public UsuarioServiceImpl(UserRepository userRepository) {
+    public AlumnoServiceImpl(AlumnoRepository userRepository) {
         this.userRepository = userRepository;
     }
 

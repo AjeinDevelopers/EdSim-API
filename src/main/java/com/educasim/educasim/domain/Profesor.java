@@ -21,6 +21,13 @@ public class Profesor {
         this.apeMat = apeMat;
     }
 
+    public Profesor(int id, String nombre, String apePat, String apeMat) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apePat = apePat;
+        this.apeMat = apeMat;
+    }
+    
     public int getId() {
         return id;
     }

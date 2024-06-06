@@ -7,6 +7,7 @@ import com.educasim.educasim.request.clases.ProfesorRegistroRequest;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +45,38 @@ public class ProfesorServiceImpl implements ProfesorService{
         }
     }
 
-    /*public Profesor login(ProfesorLoginRequest consulta){
-        
+    @GetMapping("consulta/profesor/")
+    public Profesor login(ProfesorLoginRequest consulta){
+        if(consulta != null){
+            if(!consulta.getContrasena().isEmpty() && !consulta.getCorreo().isEmpty()){
+                if(consulta.getCorreo().matches(regexmail) && consulta.getContrasena().matches(regexPass)){
+                    return profesorRepository.getProfesor(consulta);
+                }else{
+                    return null;
+                }
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
     }
 
-    public int eliminarCuenta(ProfesorDeleteRequest consulta){
-        
-    }*/
-    
+    @PostMapping("/eliminar/profesor")
+    public int eliminarCuenta(ProfesorLoginRequest consulta){
+        if(consulta != null){
+            if(!consulta.getContrasena().isEmpty() && !consulta.getCorreo().isEmpty()){
+                if(consulta.getCorreo().matches(regexmail) && consulta.getContrasena().matches(regexPass)){
+                    return profesorRepository.delProfesor(consulta);
+                }else{
+                    return 0;
+                }
+            }else{
+                return 0;
+            }
+        }else{
+            return 0;
+        }
+    }
+   
 }

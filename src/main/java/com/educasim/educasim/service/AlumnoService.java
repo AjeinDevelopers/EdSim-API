@@ -8,7 +8,7 @@ import com.educasim.educasim.request.clases.AlumnoRegistroRequest;
 
 import java.util.regex.Pattern;
 
-public interface UsuarioService {
+public interface AlumnoService {
 
     String regexPass = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$/";
     Pattern passPatern = Pattern.compile(regexPass);

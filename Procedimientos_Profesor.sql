@@ -39,7 +39,6 @@ CREATE PROCEDURE sp_consulProf(
 )
 BEGIN
     DECLARE existe INT;
-    DECLARE xMsj VARCHAR(50);
 
     SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf);
 
@@ -47,9 +46,6 @@ BEGIN
         SELECT idProfesor, correoProf, nombreProf, apePatProf, apeMatProf
         FROM Profesor
         WHERE correoProf = p_correoProf;
-    ELSE
-        SET xMsj = 'El correo no está registrado';
-        SELECT xMsj AS mensajeError;
     END IF;
 END;
 //
@@ -67,17 +63,10 @@ CREATE PROCEDURE sp_elimProf(
 )
 BEGIN
     DECLARE existe INT;
-    DECLARE xMsj VARCHAR(50);
-
     SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf);
 
-    IF (existe > 0) THEN
+    IF (existe = 1) THEN
         DELETE FROM Profesor WHERE correoProf = p_correoProf;
-        SET xMsj = 'Alumno eliminado correctamente';
-        SELECT xMsj AS mensaje;
-    ELSE
-        SET xMsj = 'El correo no está registrado';
-        SELECT xMsj AS mensajeError;
     END IF;
 END;
 //
