@@ -3,7 +3,6 @@ package com.educasim.educasim.service;
 import com.educasim.educasim.domain.Profesor;
 import com.educasim.educasim.request.clases.ProfesorLoginRequest;
 import com.educasim.educasim.request.clases.ProfesorRegistroRequest;
-import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +20,7 @@ public class ProfesorServiceImpl implements ProfesorService{
     private ProfesorRepository profesorRepository;
     
     private final String regexPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,20}$";
-    private final Pattern passPatern = Pattern.compile(regexPass);
     private final String regexmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-    private final Pattern mailPattern = Pattern.compile(regexmail);
     
     @PostMapping("registro/profesor")
     public int registro(@RequestBody ProfesorRegistroRequest registro){
