@@ -1,7 +1,6 @@
 package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Profesor;
-import com.educasim.educasim.request.clases.ProfesorDeleteRequest;
 import com.educasim.educasim.request.clases.ProfesorLoginRequest;
 import com.educasim.educasim.request.clases.ProfesorRegistroRequest;
 import java.util.regex.Pattern;
@@ -46,7 +45,7 @@ public class ProfesorServiceImpl implements ProfesorService{
     }
 
     @GetMapping("consulta/profesor/")
-    public Profesor login(ProfesorLoginRequest consulta){
+    public Profesor login(@RequestBody ProfesorLoginRequest consulta){
         if(consulta != null){
             if(!consulta.getContrasena().isEmpty() && !consulta.getCorreo().isEmpty()){
                 if(consulta.getCorreo().matches(regexmail) && consulta.getContrasena().matches(regexPass)){
@@ -63,7 +62,7 @@ public class ProfesorServiceImpl implements ProfesorService{
     }
 
     @PostMapping("/eliminar/profesor")
-    public int eliminarCuenta(ProfesorLoginRequest consulta){
+    public int eliminarCuenta(@RequestBody ProfesorLoginRequest consulta){
         if(consulta != null){
             if(!consulta.getContrasena().isEmpty() && !consulta.getCorreo().isEmpty()){
                 if(consulta.getCorreo().matches(regexmail) && consulta.getContrasena().matches(regexPass)){

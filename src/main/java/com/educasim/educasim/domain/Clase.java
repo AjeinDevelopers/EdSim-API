@@ -5,9 +5,9 @@ public class Clase {
     private String id;
     private String nombre;
     private Materia materia;
-    private Alumno profesor;
+    private Profesor profesor;
 
-    public Clase(String id, String nombre, Materia materia, Alumno profesor) {
+    public Clase(String id, String nombre, Materia materia, Profesor profesor) {
         this.id = id;
         this.nombre = nombre;
         this.materia = materia;
@@ -41,11 +41,11 @@ public class Clase {
         this.materia = materia;
     }
 
-    public Alumno getProfesor() {
+    public Profesor getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(Alumno profesor) {
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
 }

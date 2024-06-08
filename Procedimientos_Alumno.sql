@@ -3,7 +3,7 @@ use EducaSim;
 #Procedimientos para Alumno
 #Procedimiento para agregar Alumno
 
-drop procedure sp_agregAlumn;
+drop procedure if exists sp_agregAlumn;
 
 delimiter //
 
@@ -93,5 +93,4 @@ END;
 
 delimiter ;
 
-CALL sp_elimAlum('correo@example.com');
 

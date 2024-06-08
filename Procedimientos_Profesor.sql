@@ -28,48 +28,47 @@ END;
 
 delimiter ;
 
-select * from profesor;
 
 #Procedimiento para consultar Profesor
+#drop procedure sp_consulProf;
 
 delimiter //
 
 CREATE PROCEDURE sp_consulProf(
-    IN p_correoProf VARCHAR(80)
+    IN p_correoProf VARCHAR(80),
+    in p_passProf VARCHAR(20)
 )
 BEGIN
     DECLARE existe INT;
 
-    SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf);
+    SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf and passProf = p_passProf);
 
-    IF (existe > 0) THEN
+    IF (existe = 1) THEN
         SELECT idProfesor, correoProf, nombreProf, apePatProf, apeMatProf
         FROM Profesor
-        WHERE correoProf = p_correoProf;
+        WHERE correoProf = p_correoProf and passProf = p_passProf;
     END IF;
 END;
 //
 
 delimiter ;
-
-CALL sp_consulProf('pablo@gmail.com');
 
 #Procedimiento para eliminar Profesor
 
 delimiter //
 
 CREATE PROCEDURE sp_elimProf(
-    IN p_correoProf VARCHAR(80)
+    IN p_correoProf VARCHAR(80),
+    in p_passProf VARCHAR(20)
 )
 BEGIN
     DECLARE existe INT;
-    SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf);
+    SET existe = (SELECT COUNT(*) FROM Profesor WHERE correoProf = p_correoProf and passProf = p_passProf);
 
     IF (existe = 1) THEN
-        DELETE FROM Profesor WHERE correoProf = p_correoProf;
+        DELETE FROM Profesor WHERE correoProf = p_correoProf and passProf = p_passProf;
     END IF;
 END;
 //
 
 delimiter ;
-CALL sp_elimProf('pablo@gmail.com');
