@@ -2,11 +2,11 @@ package com.educasim.educasim.request.clases;
 
 public class LoginResponse {
 
-    int sessionId;
+    String sessionId;
     String message;
     boolean error;
 
-    public LoginResponse(int sessionId, String message, boolean error) {
+    public LoginResponse(String sessionId, String message, boolean error) {
         this.sessionId = sessionId;
         this.message = message;
         this.error = error;
@@ -15,11 +15,11 @@ public class LoginResponse {
     public LoginResponse() {
     }
 
-    public int getSessionId() {
+    public String getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(int sessionId) {
+    public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 

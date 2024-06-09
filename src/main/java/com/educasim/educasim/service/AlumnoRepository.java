@@ -6,6 +6,7 @@ import com.educasim.educasim.domain.Clase;
 import com.educasim.educasim.request.clases.AlumnoDeleteRequest;
 import com.educasim.educasim.request.clases.AlumnoLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +15,13 @@ public class AlumnoRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public int insertUsuario(Alumno alumno, Clase clase) {
-        String sql = "CALL sp_agregAlumn(?,?,?,?, ?,?,?)";
-        return jdbcTemplate.update(sql, clase.getId(), alumno.getCorreo(), alumno.getContrasena(), alumno.getPinSeguridad(), alumno.getNombre(), alumno.getApePat(), alumno.getApeMat());
+    public String insertUsuario(Alumno alumno, Clase clase) {
+        String sql = "CALL sp_registrarAlum(?,?,?,?, ?,?,?)";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{clase.getId(), alumno.getCorreo(), alumno.getContrasena(), alumno.getPinSeguridad(), alumno.getNombre(), alumno.getApePat(), alumno.getApeMat()}, String.class);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return "error";
+        }
     }
 
     public Alumno obtenerALumno(AlumnoLoginRequest consulta){

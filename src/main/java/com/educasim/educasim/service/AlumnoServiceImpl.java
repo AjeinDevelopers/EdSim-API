@@ -41,20 +41,20 @@ public class AlumnoServiceImpl implements AlumnoService{
 
 
                 if (!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))) {
-                    return new LoginResponse(0, "Correo o contraseña no válidos", true);
+                    return new LoginResponse(null, "Correo o contraseña no válidos", true);
                 }
 
-                int userID =  userRepository.insertUsuario(alumno, clase);
-                if(userID != 0) {
-                    return new LoginResponse(userID, "Registro exitoso", false);
+                String sessionId =  userRepository.insertUsuario(alumno, clase);
+                if(!sessionId.equals("error")) {
+                    return new LoginResponse(sessionId, "Registro exitoso", false);
                 } else {
-                    return new LoginResponse(0, "Algo salió mal, intentelo de nuevo más tarde", true);
+                    return new LoginResponse(null, "Algo salió mal, intentelo de nuevo más tarde", true);
                 }
             }
-        } catch (Exception e) {
-            return new LoginResponse(0, "Llena todos los campos!", true);
+        } catch (NullPointerException e) {
+            return new LoginResponse(null, "Llena todos los campos!", true);
         }
-        return new LoginResponse(0, "Algo salió mal, intentelo de nuevo más tarde", true);
+        return new LoginResponse(null, "Algo salió mal, intentelo de nuevo más tarde", true);
     }
 
     @GetMapping("consulta/alumno/")

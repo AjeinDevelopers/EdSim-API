@@ -22,6 +22,27 @@ create table Alumno(
     formaAprendizaje varchar(50)
 );
 
+create table sesiones(
+	idSesion varchar(100) primary key,
+    fecha date
+);
+
+create table relSesionAlum(
+	idRel int(5) primary key auto_increment,
+    idSesion varchar(100),
+    idAlumno int(3),
+    foreign key (idAlumno) references Alumno(idAlumno),
+    foreign key (idSesion) references sesiones(idSesion)
+);
+
+create table relSesionProf(
+	idRel int(5) primary key auto_increment,
+    idSesion varchar(100),
+    idProfesor int(3),
+    foreign key (idProfesor) references Profesor(idProfesor),
+    foreign key (idSesion) references sesiones(idSesion)
+);
+
 create table Materia(
 	idMateria int(3) auto_increment not null primary key,
     nombre varchar(40)
