@@ -2,9 +2,7 @@ package com.educasim.educasim.service;
 
 
 import com.educasim.educasim.domain.Alumno;
-import com.educasim.educasim.request.clases.AlumnoDeleteRequest;
-import com.educasim.educasim.request.clases.AlumnoLoginRequest;
-import com.educasim.educasim.request.clases.AlumnoRegistroRequest;
+import com.educasim.educasim.request.clases.*;
 
 import java.util.regex.Pattern;
 
@@ -15,10 +13,10 @@ public interface AlumnoService {
     String regexmail = "/^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$/";
     Pattern mailPattern = Pattern.compile(regexmail);
 
-    public int registro(AlumnoRegistroRequest registroRequest);
+    public LoginResponse registro(AlumnoRegistroRequest registroRequest);
 
     public Alumno login(AlumnoLoginRequest consulta);
     
-    public int eliminarCuenta(AlumnoDeleteRequest consulta);
+    public Response eliminarCuenta(AlumnoDeleteRequest consulta);
 
 }

@@ -2,14 +2,11 @@ package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
-import com.educasim.educasim.request.clases.AlumnoDeleteRequest;
-import com.educasim.educasim.request.clases.AlumnoLoginRequest;
-import com.educasim.educasim.request.clases.AlumnoRegistroRequest;
+import com.educasim.educasim.request.clases.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.regex.Pattern;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 @RestController
 @RequestMapping("/usuario")
@@ -31,7 +28,7 @@ public class AlumnoServiceImpl implements AlumnoService{
 
     @PostMapping("/registro/alumno")
     @Override
-    public int registro(@RequestBody AlumnoRegistroRequest registroRequest) {
+    public LoginResponse registro(@RequestBody AlumnoRegistroRequest registroRequest) {
 
         Alumno alumno = registroRequest.getUsuario();
         Clase clase = registroRequest.getClase();
@@ -44,16 +41,20 @@ public class AlumnoServiceImpl implements AlumnoService{
 
 
                 if (!alumno.getContrasena().matches(String.valueOf(passPatern)) || !alumno.getCorreo().matches(String.valueOf(mailPattern))) {
-                    return 0;
+                    return new LoginResponse(0, "Correo o contraseña no válidos", true);
                 }
 
-                return userRepository.insertUsuario(alumno, clase);
-
+                int userID =  userRepository.insertUsuario(alumno, clase);
+                if(userID != 0) {
+                    return new LoginResponse(userID, "Registro exitoso", false);
+                } else {
+                    return new LoginResponse(0, "Algo salió mal, intentelo de nuevo más tarde", true);
+                }
             }
         } catch (Exception e) {
-            return 0;
+            return new LoginResponse(0, "Llena todos los campos!", true);
         }
-        return 0;
+        return new LoginResponse(0, "Algo salió mal, intentelo de nuevo más tarde", true);
     }
 
     @GetMapping("consulta/alumno/")
@@ -73,15 +74,20 @@ public class AlumnoServiceImpl implements AlumnoService{
 
     @PostMapping("/eliminar/alumno")
     @Override
-    public int eliminarCuenta(@RequestBody AlumnoDeleteRequest consulta) {
+    public Response eliminarCuenta(@RequestBody AlumnoDeleteRequest consulta) {
         if(!consulta.getCorreo().isEmpty() && !consulta.getPinSeguridad().isEmpty()){
             try{
-                return userRepository.eliminarAlumno(consulta);
+                int resul = userRepository.eliminarAlumno(consulta);
+                if(resul == 1){
+                    return new Response("Cuenta eliminada", false);
+                }else{
+                    return new Response("Algo salió mal, intentelo de nuevo", true);
+                }
             }catch(Exception e){
-                return 0;
+                return new Response("Llena todos los campos!", true);
             }
         }else{
-            return 0;
+            return new Response("Algo salió mal, intentelo de nuevo", true);
         }
     }
 }

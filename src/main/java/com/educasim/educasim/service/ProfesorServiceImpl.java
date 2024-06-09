@@ -1,6 +1,7 @@
 package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Profesor;
+import com.educasim.educasim.request.clases.Response;
 import com.educasim.educasim.request.clases.ProfesorLoginRequest;
 import com.educasim.educasim.request.clases.ProfesorRegistroRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +24,26 @@ public class ProfesorServiceImpl implements ProfesorService{
     private final String regexmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     
     @PostMapping("registro/profesor")
-    public int registro(@RequestBody ProfesorRegistroRequest registro){
+    public Response registro(@RequestBody ProfesorRegistroRequest registro){
         if(registro != null){
             
             if(!registro.getApeMat().isEmpty() && !registro.getApePat().isEmpty() && !registro.getContrasena().isEmpty() && !registro.getCorreo().isEmpty() && !registro.getNombre().isEmpty()){
                 if(registro.getCorreo().matches(regexmail) && registro.getContrasena().matches(regexPass)){
-                    return profesorRepository.insertProfesor(registro);
+                    int resul = profesorRepository.insertProfesor(registro);
+                    if(resul == 1){
+                        return new Response("Registro exitoso", false);
+                    }else {
+                        return new Response("Algo salió mal, intentelo de nuevo", true);
+                    }
                 }else{
-                    return 0;
+                    return new Response("Correo o contraseña no válidos", true);
                 }
             }else{
-                return 0;
+                return new Response("Llena todos los campos", true);
             }
             
         }else{
-            return 0;
+            return new Response("Algo salió mal, intentelo de nuevo", true);
         }
     }
 
@@ -59,19 +65,24 @@ public class ProfesorServiceImpl implements ProfesorService{
     }
 
     @PostMapping("/eliminar/profesor")
-    public int eliminarCuenta(@RequestBody ProfesorLoginRequest consulta){
+    public Response eliminarCuenta(@RequestBody ProfesorLoginRequest consulta){
         if(consulta != null){
             if(!consulta.getContrasena().isEmpty() && !consulta.getCorreo().isEmpty()){
                 if(consulta.getCorreo().matches(regexmail) && consulta.getContrasena().matches(regexPass)){
-                    return profesorRepository.delProfesor(consulta);
+                    int resul = profesorRepository.delProfesor(consulta);
+                    if(resul == 1) {
+                        return new Response("Cuenta eliminada", false);
+                    }else{
+                        return new Response("Algo salió mal, intentelo de nuevo", true);
+                    }
                 }else{
-                    return 0;
+                    return new Response("Correo o contraseña no válidos", true);
                 }
             }else{
-                return 0;
+                return new Response("Llena todos los campos", true);
             }
         }else{
-            return 0;
+            return new Response("Algo salió mal, intentelo de nuevo", true);
         }
     }
    
