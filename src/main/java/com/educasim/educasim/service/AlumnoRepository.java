@@ -3,6 +3,7 @@ package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
+import com.educasim.educasim.domain.Sesion;
 import com.educasim.educasim.request.clases.AlumnoDeleteRequest;
 import com.educasim.educasim.request.clases.AlumnoLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,14 @@ public class AlumnoRepository {
         return jdbcTemplate.update(sql, consulta.getCorreo(), consulta.getPinSeguridad());
     }
 
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
+
+    public String validarSesion(Sesion sesion){
+        String sql = "CALL sp_verSesionAlum(?,?)";
+        return jdbcTemplate.queryForObject(sql, new Object[]{sesion.getSesionId(), sesion.getType()}, String.class);
+    }
+
+    public String login(AlumnoLoginRequest logn){
+        String sql = "CALL sp_loginAlum(?,?)";
+        return jdbcTemplate.queryForObject(sql, new Object[]{logn.getCorreo(), logn.getContrasena()}, String.class);
     }
 }

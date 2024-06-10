@@ -2,6 +2,7 @@ package com.educasim.educasim.service;
 
 
 import com.educasim.educasim.domain.Alumno;
+import com.educasim.educasim.domain.Sesion;
 import com.educasim.educasim.request.clases.*;
 
 import java.util.regex.Pattern;
@@ -15,8 +16,12 @@ public interface AlumnoService {
 
     public LoginResponse registro(AlumnoRegistroRequest registroRequest);
 
-    public Alumno login(AlumnoLoginRequest consulta);
+    public Alumno getAlumno(AlumnoLoginRequest consulta);
+
+    public LoginResponse login(AlumnoLoginRequest login);
     
     public Response eliminarCuenta(AlumnoDeleteRequest consulta);
+
+    public Response validarSesion(Sesion sesion);
 
 }

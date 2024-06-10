@@ -110,3 +110,62 @@ END;
 delimiter ;
 
 
+delimiter //
+
+create procedure sp_verSesionAlum(
+	IN p_sesion VARCHAR(100),
+    IN TIPO VARCHAR(50)
+)
+BEGIN
+	
+    declare Xmsg varchar(50);
+    declare existe int;
+    
+    if(tipo != "alumno" and tipo != "Alumno") then
+		set Xmsg = "tipoError";
+        select Xmsg;
+    else
+		set existe = (select count(*) from relSesionAlum where idSesion = p_sesion);
+        if(existe = 1) then
+			set Xmsg = "existe";
+            select Xmsg;
+        else
+			set Xmsg = "noExiste";
+            select Xmsg;	
+        end if;
+    end if;
+    
+END;//
+
+delimiter ;
+
+drop procedure if exists sp_loginAlum;
+
+delimiter //
+
+create procedure sp_loginAlum(
+	in p_correo varchar(80),
+    in p_pass varchar(20)
+)
+BEGIN
+
+	declare existe int;
+    declare idAlumn int;
+    declare idSesion1 varchar(100);
+    declare xMsg varchar(50);
+    
+    set existe = (select count(*) from Alumno where correoAlum = p_correo and passAlum = p_pass);
+    if(existe = 1) then
+		set idAlumn = (select idAlumno from Alumno where correoAlum = p_correo and passAlum = p_pass);
+        set idSesion1 = UUID();
+        insert into sesiones(idSesion, fecha) values(idSesion1, now());
+        insert into relSesionAlum(idSesion, idAlumno) values(idSesion1, idAlumn);
+        select idSesion1;
+	else
+		set Xmsg = "error";
+        select Xmsg;
+    end if;
+
+END;//
+
+delimiter ;
