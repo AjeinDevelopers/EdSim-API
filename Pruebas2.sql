@@ -6,9 +6,15 @@ select * from relAlumClase;
 select * from sesiones;
 select * from relSesionAlum;
 select * from relSesionProf;
+select * from fase;
+select * from materia;
+select * from Clase;
 
 call sp_registrarAlum("MnS3mj", "quesakl@ggg.com", "mnn$mn4Nse", "mnn$mn4Nse", "Juan", "Casas", "Hernandez");
 call sp_registrarProf("holita@go.co", "m3#2NmsW", "Hugo", "Hernandez", "Carrillo");
-call sp_verSesionProf("199a6e25-27a2-11ef-aa7f-ec8eb53cd564", "profesor");
-
+call sp_verSesionProf("45a6a377-27fa-11ef-aa7f-ec8eb53cd564", "profesor");
+insert into fase(nombre) values("Fase 1");
+insert into Materia(nombre) values("Matematicas");
+call sp_crearClase("Mn3n2a", "Clase 1", "Fase 1", "Matematicas", "45a6a377-27fa-11ef-aa7f-ec8eb53cd564");
+select idProfesor from relSesionProf where idSesion = "45a6a377-27fa-11ef-aa7f-ec8eb53cd564";
 select count(*) from sesiones where idSesion = UUID();
