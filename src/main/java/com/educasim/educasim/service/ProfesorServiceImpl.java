@@ -35,7 +35,7 @@ public class ProfesorServiceImpl implements ProfesorService{
                     if(!resul.equals("error")) {
                         return new LoginResponse(resul, "Registro exitoso", false);
                     }else {
-                        return new LoginResponse(null, "Algo salió mal, intentelo de nuevo", true);
+                        return new LoginResponse(null, "Algo salió mal, intentelo de nuevo 1", true);
                     }
                 }else{
                     return new LoginResponse(null, "Correo o contraseña no válidos", true);
@@ -49,7 +49,7 @@ public class ProfesorServiceImpl implements ProfesorService{
         }
     }
 
-    @PostMapping("consulta/profesor/")
+    @PostMapping("login/profesor/")
     @Override
     public LoginResponse login(@RequestBody ProfesorLoginRequest consulta){
         if(consulta != null){
@@ -97,7 +97,7 @@ public class ProfesorServiceImpl implements ProfesorService{
 
     @PostMapping("/validar/profesor")
     @Override
-    public Response validarSesion(Sesion sesion) {
+    public Response validarSesion(@RequestBody Sesion sesion) {
         try {
             if (sesion != null) {
                 if (!sesion.getSesionId().isEmpty() && !sesion.getType().isEmpty()) {

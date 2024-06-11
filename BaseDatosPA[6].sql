@@ -48,13 +48,20 @@ create table Materia(
     nombre varchar(40)
 );
 
+create table fase(
+	idFase int(3) auto_increment not null primary key,
+    nombre varchar(50)
+);
+
 create table Clase(
 	idClase varchar(6) not null primary key,
     nombre varchar(50),
     idMateria int(3),
     idProfesor int(3),
+    idFase int(3),
     foreign key(idMateria) references Materia(idMateria),
-    foreign key(idProfesor) references Profesor(idProfesor)
+    foreign key(idProfesor) references Profesor(idProfesor),
+    foreign key(idFase) references fase(idFase)
 );
 
 create table Articulo(
@@ -99,7 +106,6 @@ create table RelAlumClase(
 	idRelAlumClase int(3) auto_increment not null primary key,
     idClase varChar(6),
     idAlumno int(3),
-    progreso int(3),
     foreign key(idClase) references Clase(idClase),
     foreign key(idAlumno) references Alumno(idAlumno)
 );
@@ -123,6 +129,14 @@ create table Material(
     idArticulo int(3),
     foreign key(idTema) references Tema(idTema),
     foreign key(idArticulo) references Articulo(idArticulo)
+);
+
+create table RelMateMatel(
+	idRelMateMatel int(2) auto_increment not null primary key,
+    idMateria int(3),
+    idMaterial int(3),
+    foreign key(idMateria) references Materia(idMateria),
+    foreign key(idMaterial) references Material(idMaterial)
 );
 
 create table RelAlumExam(

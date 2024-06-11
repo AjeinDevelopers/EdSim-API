@@ -46,9 +46,9 @@ BEGIN
     DECLARE idSesion1 varchar(100);
     DECLARE Xmsg varchar(100);
 
-    SET existe = (SELECT COUNT(idAlumno) FROM Profesor WHERE correoProf = p_correoProf);
+    SET existe = (SELECT COUNT(idProfesor) FROM Profesor WHERE correoProf = p_correoProf);
 
-    IF (existe = 0 and claseExiste = 1) THEN
+    IF (existe = 0) THEN
         INSERT INTO Profesor(correoProf, passProf, nombreProf, apePatProf, apeMatProf)
         VALUES (p_correoProf, p_passProf, p_nombreProf, p_apePatProf, p_apeMatProf);
         set idProfe = (select idProfesor from Profesor where correoProf = p_correoProf and passProf = p_passProf);
