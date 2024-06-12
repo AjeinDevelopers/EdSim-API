@@ -9,6 +9,7 @@ select * from relSesionProf;
 select * from fase;
 select * from materia;
 select * from Clase;
+select * from RelAlumClase;
 
 call sp_registrarAlum("MnS3mj", "quesakl@ggg.com", "mnn$mn4Nse", "mnn$mn4Nse", "Juan", "Casas", "Hernandez");
 call sp_registrarProf("holita@go.co", "m3#2NmsW", "Hugo", "Hernandez", "Carrillo");
