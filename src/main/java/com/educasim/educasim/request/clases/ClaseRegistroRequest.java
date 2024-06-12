@@ -1,30 +1,20 @@
-package com.educasim.educasim.domain;
+package com.educasim.educasim.request.clases;
 
-public class Clase {
+public class ClaseRegistroRequest {
 
-    private String id;
     private String nombre;
     private String materia;
     private String profesor;
     private String fase;
 
-    public Clase() {
-    }
-
-    public Clase(String id, String nombre, String materia, String profesor, String fase) {
-        this.id = id;
+    public ClaseRegistroRequest(String nombre, String materia, String profesor, String fase) {
         this.nombre = nombre;
         this.materia = materia;
         this.profesor = profesor;
         this.fase = fase;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public ClaseRegistroRequest() {
     }
 
     public String getNombre() {
