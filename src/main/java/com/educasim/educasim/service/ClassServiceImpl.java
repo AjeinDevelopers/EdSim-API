@@ -98,13 +98,21 @@ private ClassRepository classRepository;
     }
 
     @Override
-    public int darDeBaja(Alumno alumno, Clase clase) {
-        if (alumno != null && clase != null) {
-            int resul = 0;
-            // Query
-            return resul;
+    public Response darDeBaja(@RequestBody ClaseRegistrarRequest request) {
+        if (request !=  null & request.getAlumno() != null & request.getIdClase() != null) {
+            if(!request.getAlumno().isEmpty() & !request.getIdClase().isEmpty()){
+                String resul;
+                resul = classRepository.darDeBaja(request);
+                if(resul.equals("error")){
+                    return new Response("Ha ocurrido un error inesperado, intente de nuevo mas tarde", true);
+                }else{
+                    return new Response("Dado de baja", false);
+                }
+            }else{
+                return new Response("Ingresa todos los campos", true);
+            }
         } else {
-            return 0;
+            return new Response("Ingrese todos los campos", true);
         }
     }
 

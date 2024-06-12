@@ -27,6 +27,11 @@ public class ClassRepository {
         String sql = "call sp_claseAddAlumno(?, ?)";
         return jdbcTemplate.queryForObject(sql, new Object[]{request.getAlumno(), request.getIdClase()}, String.class);
     }
+    
+    public String darDeBaja(ClaseRegistrarRequest request){
+        String sql = "call sp_claseDeleteAlumno(?, ?)";
+        return jdbcTemplate.queryForObject(sql, new Object[]{request.getAlumno(), request.getIdClase()}, String.class);
+    }
 
 
 }
