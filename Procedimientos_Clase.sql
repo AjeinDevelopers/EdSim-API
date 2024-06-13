@@ -205,9 +205,9 @@ delimiter ;
 drop view if exists vw_obtenerMaterias;
 
 create view vw_obtenerMaterias as
-select * from Materia;
+select nombre from Materia;
 
 drop view if exists vw_obtenerFases;
 
 create view vw_obtenerFases as
-select * from fase;
+select nombre from fase;

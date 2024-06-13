@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ClaseRepository {
 
@@ -33,5 +35,14 @@ public class ClaseRepository {
         return jdbcTemplate.queryForObject(sql, new Object[]{request.getAlumno(), request.getIdClase()}, String.class);
     }
 
+    public List<String> getMaterias(){
+        String sql = "select * from vw_obtenerMaterias";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    public List<String> getFases(){
+        String sql = "select * from vw_obtenerFases";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
 
 }

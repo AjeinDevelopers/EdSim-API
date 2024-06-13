@@ -116,7 +116,8 @@ private ClaseRepository classRepository;
     }
 
     @Override
-    public List<Clase> obtenerClases(Alumno alumno) {
+    @PostMapping("/alumno/clases")
+    public List<Clase> obtenerClases(@RequestBody String alumno) {
         if (alumno != null) {
             List<Clase> clases = new ArrayList<>();
             //Query
@@ -124,5 +125,28 @@ private ClaseRepository classRepository;
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Alumno> obtenerAlumnos(String idClase) {
+        if (idClase != null) {
+            List<Alumno> alumnos = new ArrayList<>();
+            //Query
+            return alumnos;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    @GetMapping("/materias")
+    public List<String> listarMaterias(){
+        return classRepository.getMaterias();
+    }
+
+     @Override
+    @GetMapping("/fases")
+    public List<String> listarFases(){
+        return classRepository.getFases();
     }
 }
