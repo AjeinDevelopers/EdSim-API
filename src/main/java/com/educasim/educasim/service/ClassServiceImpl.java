@@ -9,7 +9,6 @@ import com.educasim.educasim.request.clases.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +19,7 @@ import java.util.Random;
 public class ClassServiceImpl implements ClassService {
 
 @Autowired
-private ClassRepository classRepository;
+private ClaseRepository classRepository;
 
     @Override
     @PostMapping("/registro")
