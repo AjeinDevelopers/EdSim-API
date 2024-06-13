@@ -17,6 +17,7 @@ public interface ClassService {
     Response eliminarClase(@RequestBody ClaseDeleteRequest clase);
     Response darDeAlta(@RequestBody ClaseRegistrarRequest request);
     Response darDeBaja(@RequestBody ClaseRegistrarRequest request);
+    List<String> listarMaterias();
     List<Clase> obtenerClases(Alumno alumno);
 
 }
