@@ -146,15 +146,22 @@ BEGIN
 	DECLARE p_idAlumno int;
     DECLARE existeAlumno int;
     DECLARE existeClase int;
+    DECLARE alumnoRegistrado int;
     DECLARE Xmsg varchar(50);
     
     set existeAlumno = (select count(*) from relSesionAlum where idSesion = p_alumno);
     set existeClase = (select count(*) from Clase where idClase = p_idClase);
     if existeAlumno = 1 and existeClase = 1 then
 		set p_idAlumno = (select idAlumno from relSesionAlum where idSesion = p_alumno);
-        insert into RelAlumClase(idAlumno, idClase) values(p_idAlumno, p_idClase);
-        set Xmsg = "inserto";
-        select Xmsg;
+        set alumnoRegistrado = (select count(*) from RelAlumClase where idAlumno = p_idAlumno and idClase = p_idClase);
+        if alumnoRegistrado = 0 then
+			insert into RelAlumClase(idAlumno, idClase) values(p_idAlumno, p_idClase);
+			set Xmsg = "inserto";
+			select Xmsg;
+		else
+			set Xmsg = "existe";
+            select Xmsg;
+        end if;
 	else
 		set Xmsg = "error";
         select Xmsg;

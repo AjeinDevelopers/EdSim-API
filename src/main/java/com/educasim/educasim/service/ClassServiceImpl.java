@@ -3,6 +3,7 @@ package com.educasim.educasim.service;
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
 import com.educasim.educasim.request.clases.ClaseDeleteRequest;
+import com.educasim.educasim.request.clases.ClaseRegistrarRequest;
 import com.educasim.educasim.request.clases.ClaseRegistroRequest;
 import com.educasim.educasim.request.clases.ClaseResponse;
 import com.educasim.educasim.request.clases.Response;
@@ -73,35 +74,44 @@ private ClaseRepository classRepository;
     }
 
     @Override
-    public String obtenerCodigo(String codigo) {
-        if (!codigo.isEmpty()) {
-            String resul = "";
-            // Query
-            return resul;
-        } else {
-            return null;
+    @PostMapping("/alumno/registrar")
+    public Response darDeAlta(@RequestBody ClaseRegistrarRequest request) {
+        if(request != null & request.getAlumno() != null & request.getIdClase() != null){
+            if(!request.getAlumno().isEmpty() & !request.getIdClase().isEmpty()){
+                String resul;
+                resul = classRepository.darAlta(request);
+                if(resul.equals("error")){
+                    return new Response("Hubo un error inesperado, intentelo más tarde", true);
+                    
+                }else if(resul.equals("existe")){
+                    return new Response("El alumno ya existe", true);
+                }else{
+                    return new Response("Registradito", false);
+                }
+            }else{
+                return new Response("Llena todos los campos", true);
+            }
+        }else{
+            return new Response("Llena todos los campos", true);
         }
     }
 
     @Override
-    public int darDeAlta(Alumno alumno, Clase clase) {
-        if (alumno != null && clase != null) {
-            int resul = 0;
-            //Query
-            return resul;
+    public Response darDeBaja(@RequestBody ClaseRegistrarRequest request) {
+        if (request !=  null & request.getAlumno() != null & request.getIdClase() != null) {
+            if(!request.getAlumno().isEmpty() & !request.getIdClase().isEmpty()){
+                String resul;
+                resul = classRepository.darDeBaja(request);
+                if(resul.equals("error")){
+                    return new Response("Ha ocurrido un error inesperado, intente de nuevo mas tarde", true);
+                }else{
+                    return new Response("Dado de baja", false);
+                }
+            }else{
+                return new Response("Ingresa todos los campos", true);
+            }
         } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public int darDeBaja(Alumno alumno, Clase clase) {
-        if (alumno != null && clase != null) {
-            int resul = 0;
-            // Query
-            return resul;
-        } else {
-            return 0;
+            return new Response("Ingrese todos los campos", true);
         }
     }
 
