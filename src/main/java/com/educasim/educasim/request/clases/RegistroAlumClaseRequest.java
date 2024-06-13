@@ -1,14 +1,14 @@
 package com.educasim.educasim.request.clases;
 
-public class ClaseRegistrarRequest {
+public class RegistroAlumClaseRequest {
 
     private String alumno;
     private String idClase;
 
-    public ClaseRegistrarRequest() {
+    public RegistroAlumClaseRequest() {
     }
 
-    public ClaseRegistrarRequest(String alumno, String idClase) {
+    public RegistroAlumClaseRequest(String alumno, String idClase) {
         this.alumno = alumno;
         this.idClase = idClase;
     }

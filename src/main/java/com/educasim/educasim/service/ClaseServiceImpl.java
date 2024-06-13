@@ -3,7 +3,7 @@ package com.educasim.educasim.service;
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
 import com.educasim.educasim.request.clases.ClaseDeleteRequest;
-import com.educasim.educasim.request.clases.ClaseRegistrarRequest;
+import com.educasim.educasim.request.clases.RegistroAlumClaseRequest;
 import com.educasim.educasim.request.clases.ClaseRegistroRequest;
 import com.educasim.educasim.request.clases.ClaseResponse;
 import com.educasim.educasim.request.clases.Response;
@@ -17,7 +17,7 @@ import java.util.Random;
 @RestController
 @RequestMapping("/clase")
 @CrossOrigin
-public class ClassServiceImpl implements ClassService {
+public class ClaseServiceImpl implements ClaseService {
 
 @Autowired
 private ClaseRepository classRepository;
@@ -75,7 +75,7 @@ private ClaseRepository classRepository;
 
     @Override
     @PostMapping("/alumno/registrar")
-    public Response darDeAlta(@RequestBody ClaseRegistrarRequest request) {
+    public Response darDeAlta(@RequestBody RegistroAlumClaseRequest request) {
         if(request != null & request.getAlumno() != null & request.getIdClase() != null){
             if(!request.getAlumno().isEmpty() & !request.getIdClase().isEmpty()){
                 String resul;
@@ -97,7 +97,7 @@ private ClaseRepository classRepository;
     }
 
     @Override
-    public Response darDeBaja(@RequestBody ClaseRegistrarRequest request) {
+    public Response darDeBaja(@RequestBody RegistroAlumClaseRequest request) {
         if (request !=  null & request.getAlumno() != null & request.getIdClase() != null) {
             if(!request.getAlumno().isEmpty() & !request.getIdClase().isEmpty()){
                 String resul;
