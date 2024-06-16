@@ -1,19 +1,16 @@
 package com.educasim.educasim.domain;
 
-import java.util.List;
+public class Fase {
 
-public class Materia {
+    int id;
+    String nombre;
 
-    private int id;
-    private String nombre;
-
-
-    public Materia(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+    public Fase() {
     }
 
-    public Materia() {
+    public Fase(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
     }
 
     public int getId() {

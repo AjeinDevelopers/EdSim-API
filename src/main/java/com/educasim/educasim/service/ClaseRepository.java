@@ -1,6 +1,9 @@
 package com.educasim.educasim.service;
 
+import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
+import com.educasim.educasim.domain.Fase;
+import com.educasim.educasim.domain.Materia;
 import com.educasim.educasim.request.clases.ClaseDeleteRequest;
 import com.educasim.educasim.request.clases.RegistroAlumClaseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +38,36 @@ public class ClaseRepository {
         return jdbcTemplate.queryForObject(sql, new Object[]{request.getAlumno(), request.getIdClase()}, String.class);
     }
 
-    public List<String> getMaterias(){
+    public List<Materia> getMaterias(){
         String sql = "select * from vw_obtenerMaterias";
-        return jdbcTemplate.queryForList(sql, String.class);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Materia materia = new Materia();
+            materia.setId(rs.getInt("idMateria"));
+            materia.setNombre(rs.getString("nombre"));
+            return materia;
+        });
     }
 
-    public List<String> getFases(){
+    public List<Fase> getFases(){
         String sql = "select * from vw_obtenerFases";
-        return jdbcTemplate.queryForList(sql, String.class);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Fase fase = new Fase();
+            fase.setId(rs.getInt("idFase"));
+            fase.setNombre(rs.getString("nombre"));
+            return fase;
+        });
+    }
+
+    public List<Alumno> getAlumnos(ClaseDeleteRequest clase){
+        String sql = "call sp_obtenerAlumClase(?, ?)";
+        return jdbcTemplate.query(sql, new Object[]{clase.getIdClase(), clase.getProfesor()}, (rs, rowNum) -> {
+            Alumno alumno = new Alumno();
+            alumno.setId(rs.getInt("idAlumno"));
+            alumno.setNombre(rs.getString("nombreAlum"));
+            alumno.setApePat(rs.getString("apePatAlum"));
+            alumno.setApeMat(rs.getString("apeMatAlum"));
+            return alumno;
+        });
     }
 
 }

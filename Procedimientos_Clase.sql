@@ -202,12 +202,46 @@ END;//
 
 delimiter ;
 
+drop procedure if exists sp_obtenerAlumClase;
+
+delimiter //
+
+create procedure sp_obtenerAlumClase(
+	in p_idClase varchar(6),
+    in p_Profesor varchar(100)
+)
+BEGIN
+    
+    select Alumno.idAlumno, Alumno.nombreAlum, Alumno.apePatAlum, Alumno.apeMatAlum from RelAlumClase
+	inner join Alumno
+	on Alumno.idAlumno =  RelAlumClase.idAlumno
+	where RelAlumClase.idClase = p_idClase;
+    
+END;//
+
+delimiter ;
+
+##drop  procedure  if exists sp_obtenerClasesProf;
+
+##delimiter //
+
+##create procedure sp_obtenerClasesProf(
+
+	##in profesor VARCHAR(100)
+
+##)
+##BEGIN
+
+##END;//
+
+##delimiter ;
+
 drop view if exists vw_obtenerMaterias;
 
 create view vw_obtenerMaterias as
-select nombre from Materia;
+select * from Materia;
 
 drop view if exists vw_obtenerFases;
 
 create view vw_obtenerFases as
-select nombre from fase;
+select * from fase;

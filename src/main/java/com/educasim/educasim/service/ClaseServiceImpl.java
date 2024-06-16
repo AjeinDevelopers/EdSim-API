@@ -2,11 +2,9 @@ package com.educasim.educasim.service;
 
 import com.educasim.educasim.domain.Alumno;
 import com.educasim.educasim.domain.Clase;
-import com.educasim.educasim.request.clases.ClaseDeleteRequest;
-import com.educasim.educasim.request.clases.RegistroAlumClaseRequest;
-import com.educasim.educasim.request.clases.ClaseRegistroRequest;
-import com.educasim.educasim.request.clases.ClaseResponse;
-import com.educasim.educasim.request.clases.Response;
+import com.educasim.educasim.domain.Fase;
+import com.educasim.educasim.domain.Materia;
+import com.educasim.educasim.request.clases.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -117,7 +115,7 @@ private ClaseRepository classRepository;
 
     @Override
     @PostMapping("/alumno/clases")
-    public List<Clase> obtenerClases(@RequestBody String alumno) {
+    public List<Clase> obtenerClasesAlumno(@RequestBody String alumno) {
         if (alumno != null) {
             List<Clase> clases = new ArrayList<>();
             //Query
@@ -127,26 +125,37 @@ private ClaseRepository classRepository;
         }
     }
 
+    /*@Override
+    @PostMapping("/profesor/clases")
+    public List<clase> obtenerClasesProfe(@RequestBody ){
+
+    }*/
+
     @Override
-    public List<Alumno> obtenerAlumnos(String idClase) {
-        if (idClase != null) {
-            List<Alumno> alumnos = new ArrayList<>();
-            //Query
-            return alumnos;
+    @PostMapping("/alumno/obtener")
+    public ClaseObtenerAlumnosResponse obtenerAlumnos(@RequestBody ClaseDeleteRequest clase) {
+        if (clase != null & !clase.getIdClase().isEmpty()) {
+            List<Alumno> alumnos;
+            alumnos = classRepository.getAlumnos(clase);
+            if (!alumnos.isEmpty()) {
+                return new ClaseObtenerAlumnosResponse(alumnos, false, "Alumnos encontrados");
+            } else {
+                return new ClaseObtenerAlumnosResponse(null, true, "No se encontraron alumnos");
+            }
         } else {
-            return null;
+            return new ClaseObtenerAlumnosResponse(null, true, "Ingresa todos los campos");
         }
     }
 
     @Override
     @GetMapping("/materias")
-    public List<String> listarMaterias(){
+    public List<Materia> listarMaterias(){
         return classRepository.getMaterias();
     }
 
      @Override
     @GetMapping("/fases")
-    public List<String> listarFases(){
+    public List<Fase> listarFases(){
         return classRepository.getFases();
     }
 }

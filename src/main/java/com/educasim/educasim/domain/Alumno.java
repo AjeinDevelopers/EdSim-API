@@ -6,6 +6,14 @@ public class Alumno {
 
     private int id;
     private String correo;
+
+    public Alumno(int id, String nombre, String apePat, String apeMat) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apePat = apePat;
+        this.apeMat = apeMat;
+    }
+
     private String contrasena;
     private String pinSeguridad;
     private String nombre;
