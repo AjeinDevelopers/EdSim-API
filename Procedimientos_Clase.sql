@@ -221,20 +221,65 @@ END;//
 
 delimiter ;
 
-##drop  procedure  if exists sp_obtenerClasesProf;
+drop  procedure  if exists sp_obtenerClasesProf;
 
-##delimiter //
+delimiter //
 
-##create procedure sp_obtenerClasesProf(
+create procedure sp_obtenerClasesProf(
 
-	##in profesor VARCHAR(100)
+	in profesor VARCHAR(100),
+    in p_tipoUsuario varchar(100)
 
-##)
-##BEGIN
+)
+BEGIN
 
-##END;//
+	DECLARE p_idProfe int;
+    
+    set p_idProfe = (select idProfesor from relSesionProf where idSesion = profesor);
+    select  clase.idClase , clase.nombre, materia.nombre as materia, fase.nombre as fase from Clase
+    inner join materia
+    on clase.idMateria = materia.idMateria
+    inner join fase
+    on clase.idFase = fase.idFase
+    where clase.idProfesor = p_idProfe;
 
-##delimiter ;
+END;//
+
+delimiter ;
+
+drop procedure if exists sp_cambiarClase;
+
+delimiter //
+
+create procedure sp_cambiarClase(
+
+	in p_alumno varchar(100),
+    in p_idClase varchar(6)
+
+)
+BEGIN
+
+	DECLARE p_idAlumno int;
+    DECLARE Xmsg varchar(255);
+    DECLARE existeAlumno int;
+	DECLARE existeClase int;
+    
+    set existeAlumno = (select count(*) from relSesionAlum where idSesion = p_alumno);
+    set existeClase = (select count(*) from Clase where idClase = p_idClase);
+    
+    if existeAlumno = 1 and existeClase = 1 then
+		set p_idAlumno = (select idAlumno from relSesionAlum where idSesion = p_alumno);
+        update RelAlumClase set idClase = p_idClase where idAlumno = p_idAlumno;
+        set Xmsg = "cambio";
+        select Xmsg;
+    else
+		set Xmsg = "error";
+        select Xmsg;
+    end if;
+
+END;//
+
+delimiter ;
 
 drop view if exists vw_obtenerMaterias;
 

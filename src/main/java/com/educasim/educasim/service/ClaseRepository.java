@@ -5,6 +5,7 @@ import com.educasim.educasim.domain.Clase;
 import com.educasim.educasim.domain.Fase;
 import com.educasim.educasim.domain.Materia;
 import com.educasim.educasim.request.clases.ClaseDeleteRequest;
+import com.educasim.educasim.request.clases.ObtenerClasesRequest;
 import com.educasim.educasim.request.clases.RegistroAlumClaseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -67,6 +68,18 @@ public class ClaseRepository {
             alumno.setApePat(rs.getString("apePatAlum"));
             alumno.setApeMat(rs.getString("apeMatAlum"));
             return alumno;
+        });
+    }
+
+    public List<Clase> getClases(ObtenerClasesRequest usuario){
+        String sql = "call sp_obtenerClasesProfesor(?, ?)";
+        return jdbcTemplate.query(sql, new Object[]{usuario.getUsuario(), usuario.getTipoUsuario()}, (rs, rowNum) -> {
+            Clase clase = new Clase();
+            clase.setId(rs.getString("idClase"));
+            clase.setNombre(rs.getString("nombre"));
+            clase.setMateria(rs.getString("materia"));
+            clase.setFase(rs.getString("fase"));
+            return clase;
         });
     }
 

@@ -19,6 +19,13 @@ public class Clase {
         this.fase = fase;
     }
 
+    public Clase(String id, String nombre, String materia, String fase) {
+        this.id = id;
+        this.nombre = nombre;
+        this.materia = materia;
+        this.fase = fase;
+    }
+
     public String getId() {
         return id;
     }

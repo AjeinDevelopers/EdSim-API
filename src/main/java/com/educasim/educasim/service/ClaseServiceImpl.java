@@ -80,7 +80,6 @@ private ClaseRepository classRepository;
                 resul = classRepository.darAlta(request);
                 if(resul.equals("error")){
                     return new Response("Hubo un error inesperado, intentelo más tarde", true);
-                    
                 }else if(resul.equals("existe")){
                     return new Response("El alumno ya existe", true);
                 }else{
@@ -114,22 +113,24 @@ private ClaseRepository classRepository;
     }
 
     @Override
-    @PostMapping("/alumno/clases")
-    public List<Clase> obtenerClasesAlumno(@RequestBody String alumno) {
-        if (alumno != null) {
-            List<Clase> clases = new ArrayList<>();
-            //Query
-            return clases;
-        } else {
-            return null;
+    @PostMapping("/profesor/clases")
+    public ObtenerClasesResponse obtenerClasesProfesor(@RequestBody ObtenerClasesRequest profesor){
+        if(profesor != null && profesor.getUsuario() != null){
+            if(!profesor.getUsuario().isEmpty()){
+                List<Clase> clases = new ArrayList<>();
+                clases = classRepository.getClases(profesor);
+                if(!clases.isEmpty()){
+                    return new ObtenerClasesResponse(clases, false, "Clases encontradas");
+                }else{
+                    return new ObtenerClasesResponse(null, true, "No se encontraron clases");
+                }
+            }else{
+                return new ObtenerClasesResponse(null, true, "Ingresa todos los campos");
+            }
+        }else{
+            return new ObtenerClasesResponse(null, true, "Ingresa todos los campos");
         }
     }
-
-    /*@Override
-    @PostMapping("/profesor/clases")
-    public List<clase> obtenerClasesProfe(@RequestBody ){
-
-    }*/
 
     @Override
     @PostMapping("/alumno/obtener")
